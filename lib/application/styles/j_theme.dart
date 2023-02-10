@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class JTextTheme {
   static get light => TextTheme(
         titleLarge: const TextStyle(
-          fontSize: 20,
+          fontSize: 30,
           fontWeight: FontWeight.w800,
           color: Colors.black,
         ),
@@ -33,25 +33,25 @@ class CustomColors extends ThemeExtension<CustomColors> {
   const CustomColors({
     required this.primary,
     required this.disable,
-    required this.warning,
-    required this.danger,
+    required this.surface,
+    required this.background,
   });
   final Color? primary;
   final Color? disable;
-  final Color? warning;
-  final Color? danger;
+  final Color? surface;
+  final Color? background;
   @override
   CustomColors copyWith({
     Color? primary,
     Color? disable,
-    Color? warning,
-    Color? danger,
+    Color? surface,
+    Color? background,
   }) {
     return CustomColors(
       primary: primary ?? this.primary,
       disable: disable ?? this.disable,
-      warning: warning ?? this.warning,
-      danger: danger ?? this.danger,
+      surface: surface ?? this.surface,
+      background: background ?? this.background,
     );
   }
 
@@ -64,8 +64,8 @@ class CustomColors extends ThemeExtension<CustomColors> {
     return CustomColors(
       primary: Color.lerp(primary, other.primary, t),
       disable: Color.lerp(disable, other.disable, t),
-      warning: Color.lerp(warning, other.warning, t),
-      danger: Color.lerp(danger, other.danger, t),
+      surface: Color.lerp(surface, other.surface, t),
+      background: Color.lerp(background, other.background, t),
     );
   }
 
@@ -73,20 +73,20 @@ class CustomColors extends ThemeExtension<CustomColors> {
   // to the `print()` method.
   @override
   String toString() => 'CustomColors('
-      'primary: $primary, disable: $disable, warning: $disable, danger: $danger'
+      'primary: $primary, disable: $disable, surface: $disable, background: $background'
       ')';
   // the light theme
   static const light = CustomColors(
-    primary: Colors.blueAccent,
+    primary: Color(0xff2A7DE1),
     disable: Color(0xFFa6b6c6),
-    warning: Color(0xffffc107),
-    danger: Color(0xffdc3545),
+    surface: Color(0xffffffff),
+    background: Color(0xffdc3545),
   );
   // the dark theme
   static const dark = CustomColors(
     primary: Colors.blueAccent,
     disable: Color(0xFFa6b6c6),
-    warning: Color(0xfff39c12),
-    danger: Color(0xffe74c3c),
+    surface: Color(0xffffffff),
+    background: Color(0xffe74c3c),
   );
 }

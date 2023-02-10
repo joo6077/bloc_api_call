@@ -1,23 +1,51 @@
 import 'package:comento_task/application/const/variables.dart';
+import 'package:comento_task/application/styles/j_theme.dart';
 import 'package:comento_task/application/types/j_radio_type.dart';
 import 'package:comento_task/presentation/list/widgets/advertisement_card.dart';
 import 'package:comento_task/presentation/list/widgets/category_card.dart';
+import 'package:comento_task/presentation/list/widgets/filter_modal.dart';
 import 'package:comento_task/presentation/widgets/j_button.dart';
 import 'package:comento_task/presentation/widgets/j_divider.dart';
 import 'package:comento_task/presentation/widgets/j_radio.dart';
 import 'package:flutter/material.dart';
 
-class ListPage extends StatelessWidget {
-  ListPage({super.key});
+class ListPage extends StatefulWidget {
+  const ListPage({super.key});
 
+  @override
+  State<ListPage> createState() => _ListPageState();
+}
+
+class _ListPageState extends State<ListPage> {
   final List<JRadioType> _orderList = [
     JRadioType(name: TEXT_ASCENDING_ORDER, isSelected: true),
     JRadioType(name: TEXT_DESCENDING_ORDER, isSelected: false),
   ];
 
+  OverlayEntry? _filterOverlayEntry;
+
+  void _showModal(BuildContext context) {
+    _filterOverlayEntry = OverlayEntry(
+      builder: (context) => FilterModal(
+        onClose: _hideModal,
+        onSave: () {
+          _hideModal();
+        },
+      ),
+    );
+
+    Overlay.of(context).insert(_filterOverlayEntry!);
+  }
+
+  void _hideModal() {
+    _filterOverlayEntry?.remove();
+  }
+
   @override
   Widget build(BuildContext context) {
     final s = MediaQuery.of(context).size;
+    final textTheme = Theme.of(context).textTheme;
+    final customColors = Theme.of(context).extension<CustomColors>()!;
 
     return ListView(
       children: [
@@ -32,7 +60,7 @@ class ListPage extends StatelessWidget {
               ),
               JButton(
                 label: TEXT_FILTER,
-                onTap: () {},
+                onTap: () => _showModal(context),
               ),
             ],
           ),
@@ -45,14 +73,15 @@ class ListPage extends StatelessWidget {
           title: 'Title',
           content: 'content',
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
-        AdvertisementCard(
+        const AdvertisementCard(
           name: 'name',
           title: 'title',
           content: 'content',
-          imageUrl: 'https://cdn.comento.kr/assignment/test2.jpg',
+          imageUrl: '',
+          // imageUrl: 'https://cdn.comento.kr/assignment/test2.jpg',
         ),
       ],
     );
