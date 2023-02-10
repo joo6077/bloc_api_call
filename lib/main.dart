@@ -1,3 +1,5 @@
+import 'package:comento_task/application/styles/j_theme.dart';
+import 'package:comento_task/presentation/list/list_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,11 +11,21 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData.light().copyWith(
+        extensions: <ThemeExtension<dynamic>>[
+          CustomColors.light,
+        ],
+        textTheme: JTextTheme.light,
+      ),
+      darkTheme: ThemeData.dark().copyWith(
+        extensions: <ThemeExtension<dynamic>>[
+          CustomColors.dark,
+        ],
+      ),
       home: Scaffold(
-        body: Center(
-          child: Text('Hello Worldsss!'),
-        ),
+        backgroundColor: Color(0xffefefef),
+        body: SafeArea(child: ListPage()),
       ),
     );
   }
