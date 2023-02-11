@@ -32,38 +32,43 @@ class _ListPageState extends State<ListPage> {
     return Scaffold(
       backgroundColor: customColors.surface,
       body: SafeArea(
-        child: Container(
-          color: customColors.background,
-          child: BlocBuilder<ListBloc, ListState>(builder: (_, state) {
-            return state is LoadedListState
-                ? ListView.builder(
-                    itemCount: state.numbers.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      if ((index + 1) % 4 == 0) {
-                        if (state.ads.length > state.numbers[index]) {
-                          final adsItem = state.ads[state.numbers[index]];
-                          return AdvertisementCard(
-                            title: adsItem.title!,
-                            content: adsItem.contents!,
-                            imageUrl: IMAGE_PATH + adsItem.img!,
+        child: BlocBuilder<ListBloc, ListState>(builder: (_, state) {
+          return CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                floating: true,
+                toolbarHeight: 41,
+                flexibleSpace: FlexibleSpaceBar(background: ListHeader()),
+              ),
+              SliverList(
+                delegate: state is LoadedListState
+                    ? SliverChildBuilderDelegate((context, index) {
+                        if ((index + 1) % 4 == 0) {
+                          if (state.ads.length > state.numbers[index]) {
+                            final adsItem = state.ads[state.numbers[index]];
+                            return AdvertisementCard(
+                              title: adsItem.title!,
+                              content: adsItem.contents!,
+                              imageUrl: IMAGE_PATH + adsItem.img!,
+                            );
+                          }
+                          return const SizedBox();
+                        } else {
+                          final listsItem = state.lists[state.numbers[index]];
+                          return CategoryCard(
+                            name: listsItem.categoryId.toString(),
+                            id: listsItem.id.toString(),
+                            userId: listsItem.userId.toString(),
+                            title: listsItem.title.toString(),
+                            content: listsItem.contents.toString(),
                           );
                         }
-                        return const SizedBox();
-                      } else {
-                        final listsItem = state.lists[state.numbers[index]];
-                        return CategoryCard(
-                          name: listsItem.categoryId.toString(),
-                          id: listsItem.id.toString(),
-                          userId: listsItem.userId.toString(),
-                          title: listsItem.title.toString(),
-                          content: listsItem.contents.toString(),
-                        );
-                      }
-                    },
-                  )
-                : const SizedBox();
-          }),
-        ),
+                      })
+                    : SliverChildListDelegate([]),
+              ),
+            ],
+          );
+        }),
       ),
     );
   }
