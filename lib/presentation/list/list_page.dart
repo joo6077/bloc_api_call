@@ -1,6 +1,7 @@
 import 'package:comento_task/application/const/variables.dart';
 import 'package:comento_task/application/styles/j_theme.dart';
 import 'package:comento_task/application/types/j_radio_type.dart';
+import 'package:comento_task/presentation/list/controllers/modal_controller.dart';
 import 'package:comento_task/presentation/list/widgets/advertisement_card.dart';
 import 'package:comento_task/presentation/list/widgets/category_card.dart';
 import 'package:comento_task/presentation/list/widgets/filter_modal.dart';
@@ -17,29 +18,12 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
+  final _modalController = ModalController();
+
   final List<JRadioType> _orderList = [
     JRadioType(name: TEXT_ASCENDING_ORDER, isSelected: true),
     JRadioType(name: TEXT_DESCENDING_ORDER, isSelected: false),
   ];
-
-  OverlayEntry? _filterOverlayEntry;
-
-  void _showModal(BuildContext context) {
-    _filterOverlayEntry = OverlayEntry(
-      builder: (context) => FilterModal(
-        onClose: _hideModal,
-        onSave: () {
-          _hideModal();
-        },
-      ),
-    );
-
-    Overlay.of(context).insert(_filterOverlayEntry!);
-  }
-
-  void _hideModal() {
-    _filterOverlayEntry?.remove();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,43 +31,45 @@ class _ListPageState extends State<ListPage> {
     final textTheme = Theme.of(context).textTheme;
     final customColors = Theme.of(context).extension<CustomColors>()!;
 
-    return ListView(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 7),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              JRadio(
-                onChange: (value) {},
-                items: _orderList,
-              ),
-              JButton(
-                label: TEXT_FILTER,
-                onTap: () => _showModal(context),
-              ),
-            ],
+    return Scaffold(
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 7),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                JRadio(
+                  onChange: (value) {},
+                  items: _orderList,
+                ),
+                JButton(
+                  label: TEXT_FILTER,
+                  onTap: () => _modalController.showModal(context),
+                ),
+              ],
+            ),
           ),
-        ),
-        const JDivider(),
-        const CategoryCard(
-          name: 'name',
-          id: 'id',
-          userId: 'userId',
-          title: 'Title',
-          content: 'content',
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        const AdvertisementCard(
-          name: 'name',
-          title: 'title',
-          content: 'content',
-          imageUrl: '',
-          // imageUrl: 'https://cdn.comento.kr/assignment/test2.jpg',
-        ),
-      ],
+          const JDivider(),
+          const CategoryCard(
+            name: 'name',
+            id: 'id',
+            userId: 'userId',
+            title: 'Title',
+            content: 'content',
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          const AdvertisementCard(
+            name: 'name',
+            title: 'title',
+            content: 'content',
+            // imageUrl: '',
+            imageUrl: 'https://cdn.comento.kr/assignment/test2.jpg',
+          ),
+        ],
+      ),
     );
   }
 }

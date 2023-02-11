@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class JDivider extends StatelessWidget {
-  const JDivider({super.key});
+  final Color? color;
+
+  const JDivider({
+    Key? key,
+    this.color,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +15,7 @@ class JDivider extends StatelessWidget {
     return Container(
       height: 1,
       width: s.width,
-      color: Colors.grey[350],
+      color: color ?? Colors.grey[350],
     );
   }
 }

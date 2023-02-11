@@ -38,7 +38,10 @@ class AdvertisementCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 15),
-            // Image.network(imageUrl),
+            Image.network(
+              imageUrl,
+              errorBuilder: (context, error, stackTrace) => Text('error'),
+            ),
             const SizedBox(height: 15),
             Text(
               title,

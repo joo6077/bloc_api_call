@@ -8,7 +8,7 @@ class JTextTheme {
           color: Colors.black,
         ),
         titleMedium: TextStyle(
-          fontSize: 15,
+          fontSize: 20,
           color: Colors.grey[700],
         ),
         titleSmall: TextStyle(
@@ -17,12 +17,14 @@ class JTextTheme {
         ),
         bodyLarge: const TextStyle(
           fontSize: 15,
-          fontWeight: FontWeight.w600,
           color: Colors.black,
         ),
         bodyMedium: const TextStyle(
           fontSize: 15,
-          fontWeight: FontWeight.w600,
+          color: Colors.black,
+        ),
+        bodySmall: const TextStyle(
+          fontSize: 13,
           color: Colors.black,
         ),
       );

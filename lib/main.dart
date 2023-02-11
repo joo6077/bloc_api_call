@@ -1,4 +1,5 @@
 import 'package:comento_task/application/styles/j_theme.dart';
+import 'package:comento_task/presentation/detail/detail_page.dart';
 import 'package:comento_task/presentation/list/list_page.dart';
 import 'package:flutter/material.dart';
 
@@ -23,10 +24,7 @@ class MainApp extends StatelessWidget {
           CustomColors.dark,
         ],
       ),
-      home: Scaffold(
-        backgroundColor: Color(0xffefefef),
-        body: SafeArea(child: ListPage()),
-      ),
+      home: DetailPage(),
     );
   }
 }
