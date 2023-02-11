@@ -82,13 +82,13 @@ class CustomColors extends ThemeExtension<CustomColors> {
     primary: Color(0xff2A7DE1),
     disable: Color(0xFFa6b6c6),
     surface: Color(0xffffffff),
-    background: Color(0xffdc3545),
+    background: Color(0xffefefef),
   );
   // the dark theme
   static const dark = CustomColors(
     primary: Colors.blueAccent,
     disable: Color(0xFFa6b6c6),
     surface: Color(0xffffffff),
-    background: Color(0xffe74c3c),
+    background: Color(0xffefefef),
   );
 }

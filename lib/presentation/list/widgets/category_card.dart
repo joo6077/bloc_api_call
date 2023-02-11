@@ -22,52 +22,58 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
-    return Container(
-      color: Colors.white,
-      child: Padding(
-        padding: horizontalPadding,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+      children: [
+        Container(
+          color: Colors.white,
+          child: Padding(
+            padding: horizontalPadding,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  name,
-                  style: textTheme.titleMedium,
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      name,
+                      style:
+                          textTheme.titleSmall!.copyWith(color: Colors.black),
+                    ),
+                    Text(
+                      id,
+                      style: textTheme.titleSmall,
+                    ),
+                  ],
                 ),
+                const SizedBox(height: 10),
+                const JDivider(),
+                const SizedBox(height: 15),
                 Text(
-                  id,
-                  style: textTheme.titleSmall,
+                  userId,
+                  style: textTheme.bodyMedium,
                 ),
+                const SizedBox(height: 15),
+                Text(
+                  title,
+                  style: textTheme.titleLarge,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 15),
+                Text(
+                  content,
+                  style: textTheme.bodyLarge,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 20),
               ],
             ),
-            const SizedBox(height: 10),
-            const JDivider(),
-            const SizedBox(height: 15),
-            Text(
-              userId,
-              style: textTheme.bodyMedium,
-            ),
-            const SizedBox(height: 15),
-            Text(
-              title,
-              style: textTheme.titleLarge,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: 15),
-            Text(
-              content,
-              style: textTheme.bodyLarge,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: 20),
-          ],
+          ),
         ),
-      ),
+        const SizedBox(height: 10),
+      ],
     );
   }
 }

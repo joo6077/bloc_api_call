@@ -1,4 +1,3 @@
-import 'package:comento_task/application/const/variables.dart';
 import 'package:comento_task/application/styles/j_theme.dart';
 import 'package:comento_task/presentation/widgets/j_divider.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +14,14 @@ class DetailAnswer extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 20),
-        JDivider(),
+        const JDivider(),
         const SizedBox(height: 20),
         Text(
           'reply_user_name',
           style: textTheme.bodyMedium!.copyWith(color: Colors.grey),
         ),
         const SizedBox(height: 10),
-        JDivider(),
+        const JDivider(),
         const SizedBox(height: 15),
         Text(
           'contents',
@@ -37,7 +36,7 @@ class DetailAnswer extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         ),
         const SizedBox(height: 15),
-        JDivider(),
+        const JDivider(),
       ],
     );
   }
