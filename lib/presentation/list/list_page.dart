@@ -25,14 +25,17 @@ class _ListPageState extends State<ListPage> {
 
   @override
   void initState() {
-    context.read<ListBloc>().add(GetListEvent(
+    final listBloc = context.read<ListBloc>();
+    listBloc.add(GetListEvent(
         categoryIds: const [1, 2, 3], page: page, limit: limit, ord: ord));
 
     scrollController.addListener(() {
-      if (scrollController.position.maxScrollExtent ==
-          scrollController.offset) {
-        page++;
-        context.read<ListBloc>().add(AddListEvent(page));
+      if (!(listBloc.state as LoadedListState).hasReachedMax) {
+        if (scrollController.position.maxScrollExtent ==
+            scrollController.offset) {
+          page++;
+          listBloc.add(AddListEvent(page));
+        }
       }
     });
 
@@ -104,10 +107,13 @@ class _ListPageState extends State<ListPage> {
                                 );
                               }
                             } else {
-                              return const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 32),
-                                child:
-                                    Center(child: CircularProgressIndicator()),
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 32),
+                                child: state.hasReachedMax
+                                    ? const Text('end')
+                                    : const Center(
+                                        child: CircularProgressIndicator()),
                               );
                             }
                           },

@@ -10,7 +10,7 @@ class PaginationModel<T> {
   final List<T> data;
   @JsonKey(name: 'first_page_url')
   final String firstPageUrl;
-  final int from;
+  final int? from;
   @JsonKey(name: 'last_page')
   final int lastPage;
   @JsonKey(name: 'last_page_url')
@@ -23,7 +23,7 @@ class PaginationModel<T> {
   final int perPage;
   @JsonKey(name: 'prev_page_url')
   final String? prevPageUrl;
-  final int to;
+  final int? to;
   final int total;
 
   const PaginationModel(

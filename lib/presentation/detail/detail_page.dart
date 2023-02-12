@@ -25,11 +25,11 @@ class DetailPage extends StatelessWidget {
                     title: item.title.toString(),
                     content: item.contents.toString(),
                     createdAt: item.createdAt.toString(),
-                    replyCount: item.reply!.length.toString(),
+                    replyCount: item.reply.length.toString(),
                   ),
-                  ...item.reply!
+                  ...item.reply
                       .map((e) => DetailAnswer(
-                          replyUserName: e.user!.name.toString(),
+                          replyUserName: e.user.name.toString(),
                           contents: e.contents.toString(),
                           createdAt: e.createdAt.toString()))
                       .toList(),

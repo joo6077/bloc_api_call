@@ -1,0 +1,1 @@
+enum CardEnum { list, ads }

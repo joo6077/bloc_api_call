@@ -88,7 +88,7 @@ class _FilterModalState extends State<FilterModal> {
                     onTap: (selectedCategoriesValue) {
                       final selectedCategoryIds = <int>[];
                       for (var element in selectedCategoriesValue) {
-                        selectedCategoryIds.add(element.value.id!);
+                        selectedCategoryIds.add(element.value.id);
                       }
                       categoryIds = selectedCategoryIds;
                     },
