@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:comento_task/application/styles/j_theme.dart';
 import 'package:comento_task/application/types/j_option_type.dart';
 import 'package:comento_task/application/utils/primary_extension.dart';
@@ -27,7 +25,6 @@ class _JCheckboxState<T> extends State<JCheckbox<T>> {
     });
 
     final result = widget.items.where((element) => element.isSelected).toList();
-    inspect(widget.items);
     widget.onTap(result);
   }
 

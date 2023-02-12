@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:comento_task/application/styles/j_theme.dart';
 import 'package:comento_task/application/types/j_option_type.dart';
 import 'package:comento_task/application/utils/primary_extension.dart';
@@ -30,9 +28,6 @@ class _JRadioState<T> extends State<JRadio<T>> {
         }
       });
     }
-
-    inspect(widget.items);
-
     widget.onChange(item);
   }
 

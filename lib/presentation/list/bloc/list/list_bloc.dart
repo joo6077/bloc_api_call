@@ -32,19 +32,28 @@ class ListBloc extends Bloc<ListEvent, ListState> {
   }
 
   Future<FetchResult> _fetch({required int page, required int length}) async {
+    final numbersInfo =
+        _generateListNthAds(_listPagination.limit, length: length);
+
+    _listPagination =
+        _listPagination.copyWith(limit: numbersInfo.listCountInfo, page: page);
     final listResult = await _listRepository.getList(_listPagination);
-    _adsPagination = _adsPagination.copyWith(
-        limit:
-            (listResult.data.data.length + listResult.data.data.length ~/ 4) ~/
-                4,
-        page: page);
+    _adsPagination =
+        _adsPagination.copyWith(limit: numbersInfo.adsCountInfo, page: page);
     final adsResult = await _listRepository.getAds(_adsPagination);
 
-    final numbers =
-        _generateListNthAds(listResult.data.data.length, length: length);
+    final listModels = listResult.data.data;
+    final adsModels = adsResult.data.data;
+
+    final cutRangeNumbers =
+        (listModels.length + adsModels.length) > numbersInfo.numbers.length
+            ? numbersInfo.numbers
+                .getRange(0, listModels.length + listModels.length ~/ 4)
+                .toList()
+            : numbersInfo.numbers;
 
     return FetchResult(
-        numbers: numbers,
+        numbers: cutRangeNumbers,
         lists: listResult.data.data,
         ads: adsResult.data.data,
         hasReachedMax: listResult.data.to == listResult.data.total);
@@ -64,25 +73,35 @@ class ListBloc extends Bloc<ListEvent, ListState> {
         cardEnum: CardEnum.list);
   }
 
-  List<int> _generateListNthAds(int listLimit, {required int length}) {
+  NumbersInfo _generateListNthAds(int listLimit, {required int length}) {
     final List<int> totalNumberList = [];
     final adsCount = listLimit ~/ 4;
     final totalListLength = adsCount + listLimit;
 
+    int listCountInfo = 0;
+    int adsCountInfo = 0;
+
     for (var i = 0; i < totalListLength; i++) {
       final initialLength = totalNumberList.length + length;
+
       if (initialLength == 0) {
         _updateLastList(totalNumberList);
+        listCountInfo++;
         continue;
       }
       if ((initialLength + 1) % 4 == 0) {
         _updateLastAds(totalNumberList);
+        adsCountInfo++;
       } else {
         _updateLastList(totalNumberList);
+        listCountInfo++;
       }
     }
 
-    return totalNumberList;
+    return NumbersInfo(
+        listCountInfo: listCountInfo,
+        adsCountInfo: adsCountInfo,
+        numbers: totalNumberList);
   }
 
   void _storeQuery(GetListEvent event) {
@@ -94,6 +113,7 @@ class ListBloc extends Bloc<ListEvent, ListState> {
   }
 
   dynamic inspectValue;
+  dynamic inspectValue1;
 
   ListBloc(this._listRepository) : super(const InitListState([])) {
     on<GetListEvent>((event, emit) async {
@@ -105,7 +125,10 @@ class ListBloc extends Bloc<ListEvent, ListState> {
       final result = await _fetch(page: _listPagination.page, length: 0);
 
       emit(LoadedListState(
-          lists: result.lists, numbers: result.numbers, ads: result.ads));
+          lists: result.lists,
+          numbers: result.numbers,
+          ads: result.ads,
+          hasReachedMax: false));
     });
 
     on<AddListEvent>((event, emit) async {
@@ -137,5 +160,17 @@ class FetchResult {
     required this.lists,
     required this.ads,
     required this.hasReachedMax,
+  });
+}
+
+class NumbersInfo {
+  final int listCountInfo;
+  final int adsCountInfo;
+  final List<int> numbers;
+
+  NumbersInfo({
+    required this.listCountInfo,
+    required this.adsCountInfo,
+    required this.numbers,
   });
 }
