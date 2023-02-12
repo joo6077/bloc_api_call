@@ -11,21 +11,21 @@ PaginationModel<T> _$PaginationModelFromJson<T>(
   T Function(Object? json) fromJsonT,
 ) =>
     PaginationModel<T>(
-      currentPage: json['currentPage'] as int?,
-      data: (json['data'] as List<dynamic>?)?.map(fromJsonT).toList(),
-      firstPageUrl: json['firstPageUrl'] as String?,
-      from: json['from'] as int?,
-      lastPage: json['lastPage'] as int?,
-      lastPageUrl: json['lastPageUrl'] as String?,
+      currentPage: json['current_page'] as int,
+      data: (json['data'] as List<dynamic>).map(fromJsonT).toList(),
+      firstPageUrl: json['first_page_url'] as String,
+      from: json['from'] as int,
+      lastPage: json['last_page'] as int,
+      lastPageUrl: json['last_page_url'] as String,
       links: (json['links'] as List<dynamic>?)
           ?.map((e) => LinkModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      nextPageUrl: json['nextPageUrl'] as String?,
-      path: json['path'] as String?,
-      perPage: json['perPage'] as int?,
-      prevPageUrl: json['prevPageUrl'] as String?,
-      to: json['to'] as int?,
-      total: json['total'] as int?,
+      nextPageUrl: json['next_page_url'] as String?,
+      path: json['path'] as String,
+      perPage: json['per_page'] as int,
+      prevPageUrl: json['prev_page_url'] as String?,
+      to: json['to'] as int,
+      total: json['total'] as int,
     );
 
 Map<String, dynamic> _$PaginationModelToJson<T>(
@@ -33,17 +33,17 @@ Map<String, dynamic> _$PaginationModelToJson<T>(
   Object? Function(T value) toJsonT,
 ) =>
     <String, dynamic>{
-      'currentPage': instance.currentPage,
-      'data': instance.data?.map(toJsonT).toList(),
-      'firstPageUrl': instance.firstPageUrl,
+      'current_page': instance.currentPage,
+      'data': instance.data.map(toJsonT).toList(),
+      'first_page_url': instance.firstPageUrl,
       'from': instance.from,
-      'lastPage': instance.lastPage,
-      'lastPageUrl': instance.lastPageUrl,
+      'last_page': instance.lastPage,
+      'last_page_url': instance.lastPageUrl,
       'links': instance.links,
-      'nextPageUrl': instance.nextPageUrl,
+      'next_page_url': instance.nextPageUrl,
       'path': instance.path,
-      'perPage': instance.perPage,
-      'prevPageUrl': instance.prevPageUrl,
+      'per_page': instance.perPage,
+      'prev_page_url': instance.prevPageUrl,
       'to': instance.to,
       'total': instance.total,
     };

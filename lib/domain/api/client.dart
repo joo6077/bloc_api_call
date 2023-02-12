@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:comento_task/domain/models/ads_model.dart';
-import 'package:comento_task/domain/models/category_model.dart';
+import 'package:comento_task/domain/models/category_item_model.dart';
+import 'package:comento_task/domain/models/data_list.dart';
+import 'package:comento_task/domain/models/data.dart';
 import 'package:comento_task/domain/models/detail_model.dart';
 import 'package:comento_task/domain/models/list_model.dart';
 import 'package:comento_task/domain/models/pagination_model.dart';
@@ -27,10 +31,10 @@ abstract class Client {
   );
 
   @GET('/api/category')
-  Future<HttpResponse<CategoryModel>> getFilterCategory();
+  Future<HttpResponse<DataList<CategoryModel>>> getFilterCategory();
 
   @GET('/api/view')
-  Future<HttpResponse<List<DetailModel>>> getDetail(
+  Future<HttpResponse<Data<DetailModel>>> getDetail(
     @Query('id') int id,
   );
 }

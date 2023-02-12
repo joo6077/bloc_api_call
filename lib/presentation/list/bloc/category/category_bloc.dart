@@ -14,7 +14,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   CategoryBloc(this._listRepository) : super(InitialCategoryState()) {
     on<GetCategoryEvent>((event, emit) async {
       final categoryResult = await _listRepository.getFilterCategory();
-      emit(LoadedCategoryState(categories: categoryResult.data.category!));
+      emit(LoadedCategoryState(categories: categoryResult.data.data!));
     });
   }
 }

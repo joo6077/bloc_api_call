@@ -7,28 +7,32 @@ part 'detail_model.g.dart';
 
 @JsonSerializable()
 class DetailModel {
-  final int? id;
-  final String? title;
-  final String? contents;
-  final int? categoryId;
-  final int? userId;
-  final String? createdAt;
-  final String? updatedAt;
-  final CategoryItemModel? category;
-  final List<ReplyModel>? reply;
-  final UserModel? user;
+  final int id;
+  final String title;
+  final String contents;
+  @JsonKey(name: 'category_id')
+  final int categoryId;
+  @JsonKey(name: 'user_id')
+  final int userId;
+  @JsonKey(name: 'created_at')
+  final String createdAt;
+  @JsonKey(name: 'updated_at')
+  final String updatedAt;
+  final CategoryModel category;
+  final List<ReplyModel> reply;
+  final UserModel user;
 
   const DetailModel(
-      {this.id,
-      this.title,
-      this.contents,
-      this.categoryId,
-      this.userId,
-      this.createdAt,
-      this.updatedAt,
-      this.category,
-      this.reply,
-      this.user});
+      {required this.id,
+      required this.title,
+      required this.contents,
+      required this.categoryId,
+      required this.userId,
+      required this.createdAt,
+      required this.updatedAt,
+      required this.category,
+      required this.reply,
+      required this.user});
 
   factory DetailModel.fromJson(Map<String, dynamic> json) =>
       _$DetailModelFromJson(json);

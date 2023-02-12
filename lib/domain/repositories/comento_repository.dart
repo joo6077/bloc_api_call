@@ -1,7 +1,8 @@
 import 'package:comento_task/domain/dataSources/comento_remote_data_source.dart';
 import 'package:comento_task/domain/models/ads_model.dart';
 import 'package:comento_task/domain/models/category_item_model.dart';
-import 'package:comento_task/domain/models/category_model.dart';
+import 'package:comento_task/domain/models/data.dart';
+import 'package:comento_task/domain/models/data_list.dart';
 import 'package:comento_task/domain/models/detail_model.dart';
 import 'package:comento_task/domain/models/list_model.dart';
 import 'package:comento_task/domain/models/pagination_model.dart';
@@ -23,9 +24,9 @@ class ListRepository {
           {int page = 1, int limit = 10}) =>
       comentoRemoteDataSource.getAds(page, limit);
 
-  Future<HttpResponse<CategoryModel>> getFilterCategory() =>
+  Future<HttpResponse<DataList<CategoryModel>>> getFilterCategory() =>
       comentoRemoteDataSource.getFilterCategory();
 
-  Future<HttpResponse<List<DetailModel>>> getDetail(int id) =>
+  Future<HttpResponse<Data<DetailModel>>> getDetail(int id) =>
       comentoRemoteDataSource.getDetail(id);
 }

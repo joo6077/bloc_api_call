@@ -1,6 +1,7 @@
 import 'package:comento_task/domain/models/ads_model.dart';
 import 'package:comento_task/domain/models/category_item_model.dart';
-import 'package:comento_task/domain/models/category_model.dart';
+import 'package:comento_task/domain/models/data.dart';
+import 'package:comento_task/domain/models/data_list.dart';
 import 'package:comento_task/domain/models/detail_model.dart';
 import 'package:comento_task/domain/models/list_model.dart';
 import 'package:retrofit/retrofit.dart';
@@ -22,9 +23,9 @@ class ComentoRemoteDataSource {
   Future<HttpResponse<PaginationModel<AdsModel>>> getAds(int page, int limit) =>
       client.getAds(page, limit);
 
-  Future<HttpResponse<CategoryModel>> getFilterCategory() =>
+  Future<HttpResponse<DataList<CategoryModel>>> getFilterCategory() =>
       client.getFilterCategory();
 
-  Future<HttpResponse<List<DetailModel>>> getDetail(int id) =>
+  Future<HttpResponse<Data<DetailModel>>> getDetail(int id) =>
       client.getDetail(id);
 }

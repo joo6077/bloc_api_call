@@ -1,11 +1,13 @@
+import 'dart:developer';
+
 import 'package:comento_task/application/styles/j_theme.dart';
-import 'package:comento_task/application/types/j_radio_type.dart';
+import 'package:comento_task/application/types/j_option_type.dart';
 import 'package:comento_task/application/utils/primary_extension.dart';
 import 'package:flutter/material.dart';
 
-class JRadio extends StatefulWidget {
-  final List<JRadioType> items;
-  final JRadioOnChange onChange;
+class JRadio<T> extends StatefulWidget {
+  final List<JOptionType<T>> items;
+  final JOnChange<T> onChange;
 
   const JRadio({
     Key? key,
@@ -14,11 +16,11 @@ class JRadio extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<JRadio> createState() => _JRadioState();
+  State<JRadio> createState() => _JRadioState<T>();
 }
 
-class _JRadioState extends State<JRadio> {
-  void _changeItem(int selectedIndex, JRadioType item) {
+class _JRadioState<T> extends State<JRadio<T>> {
+  void _changeItem(int selectedIndex, JOptionType<T> item) {
     for (var i = 0; i < widget.items.length; i++) {
       setState(() {
         if (i == selectedIndex) {
@@ -28,6 +30,8 @@ class _JRadioState extends State<JRadio> {
         }
       });
     }
+
+    inspect(widget.items);
 
     widget.onChange(item);
   }

@@ -1,10 +1,23 @@
+import 'package:comento_task/application/utils/primary_extension.dart';
+import 'package:flutter/material.dart';
+
 import 'package:comento_task/application/const/variables.dart';
 import 'package:comento_task/application/styles/j_theme.dart';
 import 'package:comento_task/presentation/widgets/j_divider.dart';
-import 'package:flutter/material.dart';
 
 class DetailHeader extends StatelessWidget {
-  const DetailHeader({super.key});
+  final String title;
+  final String content;
+  final String createdAt;
+  final String replyCount;
+
+  const DetailHeader({
+    Key? key,
+    required this.title,
+    required this.content,
+    required this.createdAt,
+    required this.replyCount,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +31,17 @@ class DetailHeader extends StatelessWidget {
         JDivider(color: customColors.primary),
         const SizedBox(height: 20),
         Text(
-          'title',
+          title,
           style: textTheme.titleLarge,
         ),
         const SizedBox(height: 15),
         Text(
-          'content',
+          content,
           style: textTheme.bodyLarge,
         ),
         const SizedBox(height: 15),
         Text(
-          'create_at',
+          createdAt.timeFormat(),
           style: textTheme.titleSmall,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
@@ -37,7 +50,7 @@ class DetailHeader extends StatelessWidget {
         JDivider(color: customColors.primary),
         const SizedBox(height: 20),
         Text(
-          TEXT_ANSWER,
+          '$TEXT_ANSWER $replyCount',
           style: textTheme.titleMedium!.copyWith(color: Colors.black),
         ),
       ],

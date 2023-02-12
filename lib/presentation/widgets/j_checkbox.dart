@@ -1,11 +1,13 @@
+import 'dart:developer';
+
 import 'package:comento_task/application/styles/j_theme.dart';
-import 'package:comento_task/application/types/j_radio_type.dart';
+import 'package:comento_task/application/types/j_option_type.dart';
 import 'package:comento_task/application/utils/primary_extension.dart';
 import 'package:flutter/material.dart';
 
-class JCheckbox extends StatefulWidget {
-  final List<JRadioType> items;
-  final Function(List<JRadioType>) onTap;
+class JCheckbox<T> extends StatefulWidget {
+  final List<JOptionType<T>> items;
+  final Function(List<JOptionType<T>>) onTap;
 
   const JCheckbox({
     Key? key,
@@ -14,10 +16,10 @@ class JCheckbox extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<JCheckbox> createState() => _JCheckboxState();
+  State<JCheckbox> createState() => _JCheckboxState<T>();
 }
 
-class _JCheckboxState extends State<JCheckbox> {
+class _JCheckboxState<T> extends State<JCheckbox<T>> {
   void _selectItem(int selectedIndex) {
     setState(() {
       widget.items[selectedIndex] = widget.items[selectedIndex]
@@ -25,7 +27,7 @@ class _JCheckboxState extends State<JCheckbox> {
     });
 
     final result = widget.items.where((element) => element.isSelected).toList();
-
+    inspect(widget.items);
     widget.onTap(result);
   }
 

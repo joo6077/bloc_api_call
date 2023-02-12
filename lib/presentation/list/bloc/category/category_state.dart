@@ -12,7 +12,7 @@ class InitialCategoryState extends CategoryState {}
 class LoadingCategoryState extends CategoryState {}
 
 class LoadedCategoryState extends CategoryState {
-  final List<CategoryItemModel> categories;
+  final List<CategoryModel> categories;
 
   const LoadedCategoryState({
     required this.categories,

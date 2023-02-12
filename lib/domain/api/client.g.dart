@@ -91,13 +91,13 @@ class _Client implements Client {
   }
 
   @override
-  Future<HttpResponse<CategoryModel>> getFilterCategory() async {
+  Future<HttpResponse<DataList<CategoryModel>>> getFilterCategory() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<CategoryModel>>(Options(
+        _setStreamType<HttpResponse<DataList<CategoryModel>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -109,19 +109,22 @@ class _Client implements Client {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CategoryModel.fromJson(_result.data!);
+    final value = DataList<CategoryModel>.fromJson(
+      _result.data!,
+      (json) => CategoryModel.fromJson(json as Map<String, dynamic>),
+    );
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 
   @override
-  Future<HttpResponse<List<DetailModel>>> getDetail(id) async {
+  Future<HttpResponse<Data<DetailModel>>> getDetail(id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'id': id};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<HttpResponse<List<DetailModel>>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<HttpResponse<Data<DetailModel>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -133,9 +136,10 @@ class _Client implements Client {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = _result.data!
-        .map((dynamic i) => DetailModel.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = Data<DetailModel>.fromJson(
+      _result.data!,
+      (json) => DetailModel.fromJson(json as Map<String, dynamic>),
+    );
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

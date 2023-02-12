@@ -7,21 +7,21 @@ part of 'list_model.dart';
 // **************************************************************************
 
 ListModel _$ListModelFromJson(Map<String, dynamic> json) => ListModel(
-      id: json['id'] as int?,
-      title: json['title'] as String?,
-      contents: json['contents'] as String?,
-      categoryId: json['categoryId'] as int?,
-      userId: json['userId'] as int?,
-      createdAt: json['createdAt'] as String?,
-      updatedAt: json['updatedAt'] as String?,
+      id: json['id'] as int,
+      title: json['title'] as String,
+      contents: json['contents'] as String,
+      categoryId: json['category_id'] as int,
+      userId: json['user_id'] as int,
+      createdAt: json['created_at'] as String,
+      updatedAt: json['updated_at'] as String,
     );
 
 Map<String, dynamic> _$ListModelToJson(ListModel instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'contents': instance.contents,
-      'categoryId': instance.categoryId,
-      'userId': instance.userId,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
+      'category_id': instance.categoryId,
+      'user_id': instance.userId,
+      'created_at': instance.createdAt,
+      'updated_at': instance.updatedAt,
     };

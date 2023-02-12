@@ -4,3 +4,10 @@ extension IndexedIterable<E> on Iterable<E> {
     return map((e) => f(e, i++));
   }
 }
+
+extension TimeToFormat on String {
+  String timeFormat() {
+    var parts = split('T');
+    return parts[0].trim();
+  }
+}

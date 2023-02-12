@@ -8,19 +8,12 @@ abstract class ListEvent extends Equatable {
 }
 
 class GetListEvent extends ListEvent {
-  final List<int> categoryIds;
-  final int page;
-  final int limit;
-  final String ord;
+  final List<int>? categoryIds;
+  final int? page;
+  final int? limit;
+  final String? ord;
 
-  const GetListEvent(
-      {required this.categoryIds,
-      required this.page,
-      required this.limit,
-      required this.ord});
-
-  @override
-  List<Object> get props => [categoryIds, page, limit, ord];
+  const GetListEvent({this.categoryIds, this.page, this.limit, this.ord});
 }
 
 class AddListEvent extends ListEvent {

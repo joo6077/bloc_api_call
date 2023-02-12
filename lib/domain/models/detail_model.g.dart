@@ -7,23 +7,19 @@ part of 'detail_model.dart';
 // **************************************************************************
 
 DetailModel _$DetailModelFromJson(Map<String, dynamic> json) => DetailModel(
-      id: json['id'] as int?,
-      title: json['title'] as String?,
-      contents: json['contents'] as String?,
-      categoryId: json['categoryId'] as int?,
-      userId: json['userId'] as int?,
-      createdAt: json['createdAt'] as String?,
-      updatedAt: json['updatedAt'] as String?,
-      category: json['category'] == null
-          ? null
-          : CategoryItemModel.fromJson(
-              json['category'] as Map<String, dynamic>),
-      reply: (json['reply'] as List<dynamic>?)
-          ?.map((e) => ReplyModel.fromJson(e as Map<String, dynamic>))
+      id: json['id'] as int,
+      title: json['title'] as String,
+      contents: json['contents'] as String,
+      categoryId: json['category_id'] as int,
+      userId: json['user_id'] as int,
+      createdAt: json['created_at'] as String,
+      updatedAt: json['updated_at'] as String,
+      category:
+          CategoryModel.fromJson(json['category'] as Map<String, dynamic>),
+      reply: (json['reply'] as List<dynamic>)
+          .map((e) => ReplyModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      user: json['user'] == null
-          ? null
-          : UserModel.fromJson(json['user'] as Map<String, dynamic>),
+      user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$DetailModelToJson(DetailModel instance) =>
@@ -31,10 +27,10 @@ Map<String, dynamic> _$DetailModelToJson(DetailModel instance) =>
       'id': instance.id,
       'title': instance.title,
       'contents': instance.contents,
-      'categoryId': instance.categoryId,
-      'userId': instance.userId,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
+      'category_id': instance.categoryId,
+      'user_id': instance.userId,
+      'created_at': instance.createdAt,
+      'updated_at': instance.updatedAt,
       'category': instance.category,
       'reply': instance.reply,
       'user': instance.user,

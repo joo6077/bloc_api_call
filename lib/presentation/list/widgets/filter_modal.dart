@@ -1,9 +1,14 @@
+import 'dart:developer';
+
+import 'package:comento_task/application/enums/order_enum.dart';
+import 'package:comento_task/domain/models/category_item_model.dart';
+import 'package:comento_task/presentation/list/bloc/list/list_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:comento_task/application/const/variables.dart';
 import 'package:comento_task/application/styles/j_theme.dart';
-import 'package:comento_task/application/types/j_radio_type.dart';
+import 'package:comento_task/application/types/j_option_type.dart';
 import 'package:comento_task/presentation/list/bloc/category/category_bloc.dart';
 import 'package:comento_task/presentation/widgets/j_button.dart';
 import 'package:comento_task/presentation/widgets/j_checkbox.dart';
@@ -26,6 +31,8 @@ class FilterModal extends StatefulWidget {
 }
 
 class _FilterModalState extends State<FilterModal> {
+  List<int> categoryIds = [];
+
   @override
   void initState() {
     context.read<CategoryBloc>().add(GetCategoryEvent());
@@ -69,12 +76,23 @@ class _FilterModalState extends State<FilterModal> {
             child: BlocBuilder<CategoryBloc, CategoryState>(
               builder: (_, state) {
                 if (state is LoadedCategoryState) {
-                  final List<JRadioType> filters = [];
+                  final List<JOptionType<CategoryModel>> filters = [];
                   for (var element in state.categories) {
-                    filters.add(JRadioType(
-                        name: element.name.toString(), isSelected: false));
+                    filters.add(JOptionType<CategoryModel>(
+                        name: element.name.toString(),
+                        isSelected: false,
+                        value: element));
                   }
-                  return JCheckbox(items: filters, onTap: (value) {});
+                  return JCheckbox<CategoryModel>(
+                    items: filters,
+                    onTap: (selectedCategoriesValue) {
+                      final selectedCategoryIds = <int>[];
+                      for (var element in selectedCategoriesValue) {
+                        selectedCategoryIds.add(element.value.id!);
+                      }
+                      categoryIds = selectedCategoryIds;
+                    },
+                  );
                 } else {
                   return const SizedBox();
                 }
@@ -93,7 +111,12 @@ class _FilterModalState extends State<FilterModal> {
               backgroundColor: customColors.primary,
               padding: const EdgeInsets.symmetric(vertical: 8),
               label: TEXT_SAVE,
-              onTap: () => widget.onSave(),
+              onTap: () {
+                widget.rootContext
+                    .read<ListBloc>()
+                    .add(GetListEvent(categoryIds: categoryIds));
+                widget.onSave();
+              },
             ),
           ),
           const SizedBox(

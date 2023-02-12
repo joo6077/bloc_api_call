@@ -5,34 +5,41 @@ part 'pagination_model.g.dart';
 
 @JsonSerializable(genericArgumentFactories: true)
 class PaginationModel<T> {
-  final int? currentPage;
-  final List<T>? data;
-  final String? firstPageUrl;
-  final int? from;
-  final int? lastPage;
-  final String? lastPageUrl;
+  @JsonKey(name: 'current_page')
+  final int currentPage;
+  final List<T> data;
+  @JsonKey(name: 'first_page_url')
+  final String firstPageUrl;
+  final int from;
+  @JsonKey(name: 'last_page')
+  final int lastPage;
+  @JsonKey(name: 'last_page_url')
+  final String lastPageUrl;
   final List<LinkModel>? links;
+  @JsonKey(name: 'next_page_url')
   final String? nextPageUrl;
-  final String? path;
-  final int? perPage;
+  final String path;
+  @JsonKey(name: 'per_page')
+  final int perPage;
+  @JsonKey(name: 'prev_page_url')
   final String? prevPageUrl;
-  final int? to;
-  final int? total;
+  final int to;
+  final int total;
 
   const PaginationModel(
-      {this.currentPage,
-      this.data,
-      this.firstPageUrl,
-      this.from,
-      this.lastPage,
-      this.lastPageUrl,
+      {required this.currentPage,
+      required this.data,
+      required this.firstPageUrl,
+      required this.from,
+      required this.lastPage,
+      required this.lastPageUrl,
       this.links,
-      this.nextPageUrl,
-      this.path,
-      this.perPage,
-      this.prevPageUrl,
-      this.to,
-      this.total});
+      required this.nextPageUrl,
+      required this.path,
+      required this.perPage,
+      required this.prevPageUrl,
+      required this.to,
+      required this.total});
 
   factory PaginationModel.fromJson(
           Map<String, dynamic> json, T Function(Object? json) fromJsonT) =>
