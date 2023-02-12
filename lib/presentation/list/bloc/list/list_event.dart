@@ -16,11 +16,4 @@ class GetListEvent extends ListEvent {
   const GetListEvent({this.categoryIds, this.page, this.limit, this.ord});
 }
 
-class AddListEvent extends ListEvent {
-  final int page;
-
-  const AddListEvent(this.page);
-
-  @override
-  List<Object> get props => [page];
-}
+class AddListEvent extends ListEvent {}

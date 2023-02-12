@@ -19,7 +19,6 @@ class ListPage extends StatefulWidget {
 
 class _ListPageState extends State<ListPage> {
   final scrollController = ScrollController();
-  int page = 1;
   int limit = 10;
   String ord = OrderEnum.asc.value;
 
@@ -27,14 +26,13 @@ class _ListPageState extends State<ListPage> {
   void initState() {
     final listBloc = context.read<ListBloc>();
     listBloc.add(GetListEvent(
-        categoryIds: const [1, 2, 3], page: page, limit: limit, ord: ord));
+        categoryIds: const [1, 2, 3], page: 1, limit: limit, ord: ord));
 
     scrollController.addListener(() {
       if (!(listBloc.state as LoadedListState).hasReachedMax) {
         if (scrollController.position.maxScrollExtent ==
             scrollController.offset) {
-          page++;
-          listBloc.add(AddListEvent(page));
+          listBloc.add(AddListEvent());
         }
       }
     });

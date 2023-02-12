@@ -32,28 +32,18 @@ class ListBloc extends Bloc<ListEvent, ListState> {
   }
 
   Future<FetchResult> _fetch({required int page, required int length}) async {
-    final numbersInfo =
-        _generateListNthAds(_listPagination.limit, length: length);
-
-    _listPagination =
-        _listPagination.copyWith(limit: numbersInfo.listCountInfo, page: page);
+    inspect(_listPagination);
     final listResult = await _listRepository.getList(_listPagination);
+
+    final numbersInfo =
+        _generateListNthAds(listResult.data.data.length, length: length);
+
     _adsPagination =
         _adsPagination.copyWith(limit: numbersInfo.adsCountInfo, page: page);
     final adsResult = await _listRepository.getAds(_adsPagination);
 
-    final listModels = listResult.data.data;
-    final adsModels = adsResult.data.data;
-
-    final cutRangeNumbers =
-        (listModels.length + adsModels.length) > numbersInfo.numbers.length
-            ? numbersInfo.numbers
-                .getRange(0, listModels.length + listModels.length ~/ 4)
-                .toList()
-            : numbersInfo.numbers;
-
     return FetchResult(
-        numbers: cutRangeNumbers,
+        numbers: numbersInfo.numbers,
         lists: listResult.data.data,
         ads: adsResult.data.data,
         hasReachedMax: listResult.data.to == listResult.data.total);
@@ -128,16 +118,17 @@ class ListBloc extends Bloc<ListEvent, ListState> {
           lists: result.lists,
           numbers: result.numbers,
           ads: result.ads,
-          hasReachedMax: false));
+          hasReachedMax: result.hasReachedMax));
     });
 
     on<AddListEvent>((event, emit) async {
-      _listPagination = _listPagination.copyWith(page: event.page);
+      _listPagination =
+          _listPagination.copyWith(page: _listPagination.page + 1);
 
       final currentState = (state as LoadedListState);
 
-      final result =
-          await _fetch(page: event.page, length: currentState.numbers.length);
+      final result = await _fetch(
+          page: _listPagination.page, length: currentState.numbers.length);
 
       emit(LoadedListState(
         numbers: currentState.numbers + result.numbers,
