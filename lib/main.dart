@@ -3,7 +3,7 @@ import 'package:comento_task/application/styles/j_theme.dart';
 import 'package:comento_task/domain/api/client.dart';
 import 'package:comento_task/domain/dataSources/comento_remote_data_source.dart';
 import 'package:comento_task/domain/repositories/comento_repository.dart';
-import 'package:comento_task/presentation/list/bloc/list_bloc.dart';
+import 'package:comento_task/presentation/list/bloc/list/list_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

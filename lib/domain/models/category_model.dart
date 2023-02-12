@@ -1,20 +1,12 @@
+import 'package:comento_task/domain/models/category_item_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'category_model.g.dart';
 
 @JsonSerializable()
 class CategoryModel {
-  final int? id;
-  final String? name;
-  final String? createdAt;
-  final String? updatedAt;
-
-  const CategoryModel({
-    this.id,
-    this.name,
-    this.createdAt,
-    this.updatedAt,
-  });
+  List<CategoryItemModel>? category;
+  CategoryModel({this.category});
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) =>
       _$CategoryModelFromJson(json);

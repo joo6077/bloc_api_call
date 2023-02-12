@@ -42,30 +42,32 @@ class _JRadioState extends State<JRadio> {
             (item, index) => Padding(
               padding: EdgeInsets.only(
                   right: index != widget.items.length - 1 ? 10 : 0),
-              child: InkWell(
-                onTap: () => _changeItem(index, item),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 7.5,
-                      height: 7.5,
-                      decoration: BoxDecoration(
-                        color: item.isSelected
-                            ? customColors.primary
-                            : customColors.disable,
-                        shape: BoxShape.circle,
+              child: Material(
+                child: InkWell(
+                  onTap: () => _changeItem(index, item),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 7.5,
+                        height: 7.5,
+                        decoration: BoxDecoration(
+                          color: item.isSelected
+                              ? customColors.primary
+                              : customColors.disable,
+                          shape: BoxShape.circle,
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 5),
-                    Text(
-                      item.name,
-                      style: TextStyle(
-                        color: item.isSelected
-                            ? Colors.black
-                            : customColors.disable,
+                      const SizedBox(width: 5),
+                      Text(
+                        item.name,
+                        style: TextStyle(
+                          color: item.isSelected
+                              ? Colors.black
+                              : customColors.disable,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

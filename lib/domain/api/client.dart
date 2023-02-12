@@ -1,11 +1,9 @@
-import 'dart:developer';
-
 import 'package:comento_task/domain/models/ads_model.dart';
 import 'package:comento_task/domain/models/category_model.dart';
+import 'package:comento_task/domain/models/detail_model.dart';
 import 'package:comento_task/domain/models/list_model.dart';
 import 'package:comento_task/domain/models/pagination_model.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'client.g.dart';
@@ -29,10 +27,10 @@ abstract class Client {
   );
 
   @GET('/api/category')
-  Future<HttpResponse<List<CategoryModel>>> getFilterCategory();
+  Future<HttpResponse<CategoryModel>> getFilterCategory();
 
-  // @GET('/api/view')
-  // Future<FeedModel> getDetail(
-  //   @Query('id') int id,
-  // );
+  @GET('/api/view')
+  Future<HttpResponse<List<DetailModel>>> getDetail(
+    @Query('id') int id,
+  );
 }

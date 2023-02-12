@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:comento_task/domain/models/ads_model.dart';
 import 'package:comento_task/domain/models/list_model.dart';
@@ -10,7 +8,7 @@ part 'list_event.dart';
 part 'list_state.dart';
 
 class ListBloc extends Bloc<ListEvent, ListState> {
-  final ListRepository listRepository;
+  final ListRepository _listRepository;
 
   List<int> _generateListNthAds(List lists) {
     final totalListCount = List.generate(lists.length, (index) => index);
@@ -26,17 +24,17 @@ class ListBloc extends Bloc<ListEvent, ListState> {
 
   dynamic inspectValue;
 
-  ListBloc(this.listRepository) : super(const InitListState([])) {
+  ListBloc(this._listRepository) : super(const InitListState([])) {
     on<GetListEvent>((event, emit) async {
       emit(LoadingListState());
 
       // fetch data
-      final listResult = await listRepository.getList(
+      final listResult = await _listRepository.getList(
         category: {
           'id': [1, 2, 3]
         },
       );
-      final adsResult = await listRepository.getAds();
+      final adsResult = await _listRepository.getAds();
 
       // to model
       final lists = listResult.data.data;
@@ -49,13 +47,12 @@ class ListBloc extends Bloc<ListEvent, ListState> {
     });
 
     on<AddListEvent>((event, emit) async {
-      final listResult = await listRepository.getList(
+      final listResult = await _listRepository.getList(
         page: event.page,
         category: {
           'id': [1, 2, 3]
         },
       );
-      print((state as LoadedListState).numbers);
     });
   }
 }

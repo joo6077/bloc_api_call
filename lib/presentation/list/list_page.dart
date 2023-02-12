@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:comento_task/application/const/variables.dart';
+import 'package:comento_task/application/enums/order_enum.dart';
 import 'package:comento_task/application/styles/j_theme.dart';
-import 'package:comento_task/presentation/list/bloc/list_bloc.dart';
+import 'package:comento_task/presentation/list/bloc/list/list_bloc.dart';
 import 'package:comento_task/presentation/list/widgets/advertisement_card.dart';
 import 'package:comento_task/presentation/list/widgets/category_card.dart';
 import 'package:comento_task/presentation/list/widgets/list_header.dart';
@@ -19,10 +18,13 @@ class ListPage extends StatefulWidget {
 class _ListPageState extends State<ListPage> {
   final scrollController = ScrollController();
   int page = 1;
+  int limit = 10;
+  String ord = OrderEnum.asc.value;
 
   @override
   void initState() {
-    context.read<ListBloc>().add(GetListEvent());
+    context.read<ListBloc>().add(GetListEvent(
+        categoryIds: [1, 2, 3], page: page, limit: limit, ord: ord));
 
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==

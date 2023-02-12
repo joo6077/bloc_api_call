@@ -16,7 +16,8 @@ DetailModel _$DetailModelFromJson(Map<String, dynamic> json) => DetailModel(
       updatedAt: json['updatedAt'] as String?,
       category: json['category'] == null
           ? null
-          : CategoryModel.fromJson(json['category'] as Map<String, dynamic>),
+          : CategoryItemModel.fromJson(
+              json['category'] as Map<String, dynamic>),
       reply: (json['reply'] as List<dynamic>?)
           ?.map((e) => ReplyModel.fromJson(e as Map<String, dynamic>))
           .toList(),
