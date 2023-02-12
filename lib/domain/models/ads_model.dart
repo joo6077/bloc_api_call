@@ -1,12 +1,17 @@
-class AdsModel {
-  int? id;
-  String? title;
-  String? contents;
-  String? img;
-  String? createdAt;
-  String? updatedAt;
+import 'package:json_annotation/json_annotation.dart';
 
-  AdsModel(
+part 'ads_model.g.dart';
+
+@JsonSerializable()
+class AdsModel {
+  final int? id;
+  final String? title;
+  final String? contents;
+  final String? img;
+  final String? createdAt;
+  final String? updatedAt;
+
+  const AdsModel(
       {this.id,
       this.title,
       this.contents,
@@ -14,23 +19,8 @@ class AdsModel {
       this.createdAt,
       this.updatedAt});
 
-  AdsModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    contents = json['contents'];
-    img = json['img'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-  }
+  factory AdsModel.fromJson(Map<String, dynamic> json) =>
+      _$AdsModelFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['title'] = title;
-    data['contents'] = contents;
-    data['img'] = img;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    return data;
-  }
+  Map<String, dynamic> toJson() => _$AdsModelToJson(this);
 }

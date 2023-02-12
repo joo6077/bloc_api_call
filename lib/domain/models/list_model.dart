@@ -1,13 +1,18 @@
-class ListModel {
-  int? id;
-  String? title;
-  String? contents;
-  int? categoryId;
-  int? userId;
-  String? createdAt;
-  String? updatedAt;
+import 'package:json_annotation/json_annotation.dart';
 
-  ListModel(
+part 'list_model.g.dart';
+
+@JsonSerializable()
+class ListModel {
+  final int? id;
+  final String? title;
+  final String? contents;
+  final int? categoryId;
+  final int? userId;
+  final String? createdAt;
+  final String? updatedAt;
+
+  const ListModel(
       {this.id,
       this.title,
       this.contents,
@@ -16,25 +21,8 @@ class ListModel {
       this.createdAt,
       this.updatedAt});
 
-  ListModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    title = json['title'];
-    contents = json['contents'];
-    categoryId = json['category_id'];
-    userId = json['user_id'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-  }
+  factory ListModel.fromJson(Map<String, dynamic> json) =>
+      _$ListModelFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = id;
-    data['title'] = title;
-    data['contents'] = contents;
-    data['category_id'] = categoryId;
-    data['user_id'] = userId;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    return data;
-  }
+  Map<String, dynamic> toJson() => _$ListModelToJson(this);
 }

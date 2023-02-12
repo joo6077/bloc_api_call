@@ -1,21 +1,17 @@
-class LinksModel {
-  String? url;
-  dynamic label;
-  bool? active;
+import 'package:json_annotation/json_annotation.dart';
 
-  LinksModel({this.url, this.label, this.active});
+part 'link_model.g.dart';
 
-  LinksModel.fromJson(Map<String, dynamic> json) {
-    url = json['url'];
-    label = json['label'];
-    active = json['active'];
-  }
+@JsonSerializable()
+class LinkModel {
+  final String? url;
+  final dynamic label;
+  final bool? active;
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['url'] = url;
-    data['label'] = label;
-    data['active'] = active;
-    return data;
-  }
+  const LinkModel({this.url, this.label, this.active});
+
+  factory LinkModel.fromJson(Map<String, dynamic> json) =>
+      _$LinkModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LinkModelToJson(this);
 }

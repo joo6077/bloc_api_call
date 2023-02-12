@@ -8,3 +8,9 @@ abstract class ListEvent extends Equatable {
 }
 
 class GetListEvent extends ListEvent {}
+
+class AddListEvent extends ListEvent {
+  final int page;
+
+  const AddListEvent(this.page);
+}

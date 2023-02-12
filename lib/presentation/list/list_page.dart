@@ -17,10 +17,28 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
+  final scrollController = ScrollController();
+  int page = 1;
+
   @override
   void initState() {
     context.read<ListBloc>().add(GetListEvent());
+
+    scrollController.addListener(() {
+      if (scrollController.position.maxScrollExtent ==
+          scrollController.offset) {
+        page++;
+        context.read<ListBloc>().add(AddListEvent(page));
+      }
+    });
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -33,40 +51,57 @@ class _ListPageState extends State<ListPage> {
       backgroundColor: customColors.surface,
       body: SafeArea(
         child: BlocBuilder<ListBloc, ListState>(builder: (_, state) {
-          return CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                floating: true,
-                toolbarHeight: 41,
-                flexibleSpace: FlexibleSpaceBar(background: ListHeader()),
-              ),
-              SliverList(
-                delegate: state is LoadedListState
-                    ? SliverChildBuilderDelegate((context, index) {
-                        if ((index + 1) % 4 == 0) {
-                          if (state.ads.length > state.numbers[index]) {
-                            final adsItem = state.ads[state.numbers[index]];
-                            return AdvertisementCard(
-                              title: adsItem.title!,
-                              content: adsItem.contents!,
-                              imageUrl: IMAGE_PATH + adsItem.img!,
-                            );
-                          }
-                          return const SizedBox();
-                        } else {
-                          final listsItem = state.lists[state.numbers[index]];
-                          return CategoryCard(
-                            name: listsItem.categoryId.toString(),
-                            id: listsItem.id.toString(),
-                            userId: listsItem.userId.toString(),
-                            title: listsItem.title.toString(),
-                            content: listsItem.contents.toString(),
-                          );
-                        }
-                      })
-                    : SliverChildListDelegate([]),
-              ),
-            ],
+          return Container(
+            color: customColors.background,
+            child: CustomScrollView(
+              controller: scrollController,
+              slivers: [
+                SliverAppBar(
+                  floating: true,
+                  toolbarHeight: 41,
+                  flexibleSpace: FlexibleSpaceBar(background: ListHeader()),
+                ),
+                SliverList(
+                  delegate: state is LoadedListState
+                      ? SliverChildBuilderDelegate(
+                          childCount: state.numbers.length + 1,
+                          (context, index) {
+                            if (index < state.numbers.length) {
+                              if ((index + 1) % 4 == 0) {
+                                if (state.ads.length > state.numbers[index]) {
+                                  final adsItem =
+                                      state.ads[state.numbers[index]];
+                                  return AdvertisementCard(
+                                    title: adsItem.title!,
+                                    content: adsItem.contents!,
+                                    imageUrl: IMAGE_PATH + adsItem.img!,
+                                  );
+                                }
+                                return const SizedBox();
+                              } else {
+                                final listsItem =
+                                    state.lists[state.numbers[index]];
+                                return CategoryCard(
+                                  name: listsItem.categoryId.toString(),
+                                  id: listsItem.id.toString(),
+                                  userId: listsItem.userId.toString(),
+                                  title: listsItem.title.toString(),
+                                  content: listsItem.contents.toString(),
+                                );
+                              }
+                            } else {
+                              return const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 32),
+                                child:
+                                    Center(child: CircularProgressIndicator()),
+                              );
+                            }
+                          },
+                        )
+                      : SliverChildListDelegate([]),
+                ),
+              ],
+            ),
           );
         }),
       ),

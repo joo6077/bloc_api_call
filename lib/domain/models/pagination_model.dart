@@ -11,7 +11,7 @@ class PaginationModel<T> {
   final int? from;
   final int? lastPage;
   final String? lastPageUrl;
-  final List<LinksModel>? links;
+  final List<LinkModel>? links;
   final String? nextPageUrl;
   final String? path;
   final int? perPage;
@@ -19,7 +19,7 @@ class PaginationModel<T> {
   final int? to;
   final int? total;
 
-  PaginationModel(
+  const PaginationModel(
       {this.currentPage,
       this.data,
       this.firstPageUrl,

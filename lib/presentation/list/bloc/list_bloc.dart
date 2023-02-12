@@ -24,23 +24,38 @@ class ListBloc extends Bloc<ListEvent, ListState> {
     return totalListCount;
   }
 
+  dynamic inspectValue;
+
   ListBloc(this.listRepository) : super(const InitListState([])) {
     on<GetListEvent>((event, emit) async {
       emit(LoadingListState());
-      final listResult = await listRepository.getList(category: {
-        'id': [1]
-      });
+
+      // fetch data
+      final listResult = await listRepository.getList(
+        category: {
+          'id': [1, 2, 3]
+        },
+      );
       final adsResult = await listRepository.getAds();
+
+      // to model
       final lists = listResult.data.data;
       final ads = adsResult.data.data;
       if (lists == null) return;
+
       final numbers = _generateListNthAds(lists);
 
-      emit(LoadedListState(
-        lists: lists,
-        numbers: numbers,
-        ads: ads!,
-      ));
+      emit(LoadedListState(lists: lists, numbers: numbers, ads: ads!));
+    });
+
+    on<AddListEvent>((event, emit) async {
+      final listResult = await listRepository.getList(
+        page: event.page,
+        category: {
+          'id': [1, 2, 3]
+        },
+      );
+      print((state as LoadedListState).numbers);
     });
   }
 }
