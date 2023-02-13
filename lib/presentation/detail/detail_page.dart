@@ -3,7 +3,6 @@ import 'package:comento_task/application/styles/j_theme.dart';
 import 'package:comento_task/presentation/detail/bloc/detail_bloc.dart';
 import 'package:comento_task/presentation/detail/widgets/detail_answer.dart';
 import 'package:comento_task/presentation/detail/widgets/detail_header.dart';
-import 'package:comento_task/presentation/widgets/j_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,7 +11,9 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final customColors = Theme.of(context).extension<CustomColors>()!;
     return Scaffold(
+      backgroundColor: customColors.surface,
       body: SafeArea(
         child: BlocBuilder<DetailBloc, DetailState>(
           builder: (_, state) {
@@ -36,7 +37,14 @@ class DetailPage extends StatelessWidget {
                 ],
               );
             } else {
-              return const SizedBox();
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const DetailHeaderShimmer(),
+                    ...List.generate(5, (index) => const DetailAnswerShimmer())
+                  ],
+                ),
+              );
             }
           },
         ),

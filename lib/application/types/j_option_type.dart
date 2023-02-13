@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class JOptionType<T> {
   final String name;
   final bool isSelected;

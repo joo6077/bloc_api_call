@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:comento_task/domain/models/ads_model.dart';
 import 'package:comento_task/domain/models/category_item_model.dart';
 import 'package:comento_task/domain/models/data_list.dart';

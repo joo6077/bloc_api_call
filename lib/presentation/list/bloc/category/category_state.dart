@@ -13,6 +13,7 @@ class LoadingCategoryState extends CategoryState {}
 
 class LoadedCategoryState extends CategoryState {
   final List<CategoryModel> categories;
+
   List<int> get categoryIdsAll {
     final List<int> idList = [];
     for (var element in categories) {

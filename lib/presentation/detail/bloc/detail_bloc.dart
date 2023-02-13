@@ -1,10 +1,4 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
-import 'package:comento_task/domain/models/category_item_model.dart';
-import 'package:comento_task/domain/models/data.dart';
-import 'package:comento_task/domain/models/data_list.dart';
 import 'package:comento_task/domain/models/detail_model.dart';
 import 'package:comento_task/domain/repositories/comento_repository.dart';
 import 'package:dio/dio.dart';
@@ -22,7 +16,9 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
   DetailBloc(this._listRepository) : super(InitialDetailState()) {
     on<GetDetailEvent>((event, emit) async {
       emit(LoadingDetailState());
+
       final detailResult = await _listRepository.getDetail(event.id);
+
       emit(LoadedDetailState(detailModel: detailResult.data.data));
     });
   }

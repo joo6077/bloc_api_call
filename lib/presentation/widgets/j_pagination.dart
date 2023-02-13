@@ -59,8 +59,9 @@ class JPagination extends StatelessWidget {
                           child: Text(
                         setLabel(e.label.toString()),
                         style: TextStyle(
-                            color:
-                                e.active ? customColors.surface : Colors.black),
+                            color: e.active
+                                ? customColors.surface
+                                : customColors.font1),
                       )),
                     ),
                   ),

@@ -1,3 +1,4 @@
+import 'package:comento_task/application/styles/j_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:comento_task/application/styles/common.dart';
 
@@ -11,6 +12,7 @@ class JModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final customColors = Theme.of(context).extension<CustomColors>()!;
     final s = MediaQuery.of(context).size;
 
     return Container(
@@ -21,7 +23,7 @@ class JModal extends StatelessWidget {
           child: Padding(
         padding: horizontalPadding,
         child: Container(
-          color: Colors.white,
+          color: customColors.surface,
           child: body,
         ),
       )),

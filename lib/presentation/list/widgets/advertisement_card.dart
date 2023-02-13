@@ -1,25 +1,8 @@
 import 'package:comento_task/application/const/variables.dart';
-import 'package:comento_task/presentation/widgets/shimmer.dart';
-import 'package:comento_task/presentation/widgets/shimmer_loading.dart';
+import 'package:comento_task/application/styles/j_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:comento_task/application/styles/common.dart';
-
-const _shimmerGradient = LinearGradient(
-  colors: [
-    Color(0xFFEBEBF4),
-    Color(0xFFF4F4F4),
-    Color(0xFFEBEBF4),
-  ],
-  stops: [
-    0.1,
-    0.3,
-    0.4,
-  ],
-  begin: Alignment(-1.0, -0.3),
-  end: Alignment(1.0, 0.3),
-  tileMode: TileMode.clamp,
-);
 
 class AdvertisementCard extends StatelessWidget {
   final String title;
@@ -36,11 +19,12 @@ class AdvertisementCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final customColors = Theme.of(context).extension<CustomColors>()!;
 
     return Column(
       children: [
         Container(
-          color: Colors.white,
+          color: customColors.surface,
           child: Padding(
             padding: horizontalPadding,
             child: Column(
@@ -59,7 +43,8 @@ class AdvertisementCard extends StatelessWidget {
                 const SizedBox(height: 15),
                 Image.network(
                   imageUrl,
-                  errorBuilder: (context, error, stackTrace) => Text('error'),
+                  errorBuilder: (context, error, stackTrace) =>
+                      const Center(child: Text(TEXT_IMAGE_LOADING)),
                 ),
                 const SizedBox(height: 15),
                 Text(

@@ -1,4 +1,7 @@
+import 'package:comento_task/application/styles/common.dart';
 import 'package:comento_task/application/utils/primary_extension.dart';
+import 'package:comento_task/presentation/widgets/shimmer.dart';
+import 'package:comento_task/presentation/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:comento_task/application/const/variables.dart';
@@ -52,6 +55,47 @@ class DetailHeader extends StatelessWidget {
           style: textTheme.titleMedium!.copyWith(color: customColors.font1),
         ),
       ],
+    );
+  }
+}
+
+class DetailHeaderShimmer extends StatelessWidget {
+  const DetailHeaderShimmer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final customColors = Theme.of(context).extension<CustomColors>()!;
+
+    return Padding(
+      padding: horizontalPadding,
+      child: Shimmer(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 20),
+            JDivider(color: customColors.primary),
+            const SizedBox(height: 20),
+            const ShimmerWidget.rectangular(height: 20),
+            const SizedBox(height: 5),
+            const ShimmerWidget.rectangular(height: 20),
+            const SizedBox(height: 5),
+            const ShimmerWidget.rectangular(height: 20),
+            const SizedBox(height: 15),
+            const ShimmerWidget.rectangular(height: 18),
+            const SizedBox(height: 5),
+            const ShimmerWidget.rectangular(height: 18),
+            const SizedBox(height: 5),
+            const ShimmerWidget.rectangular(height: 18),
+            const SizedBox(height: 15),
+            const ShimmerWidget.rectangular(height: 16, width: 100),
+            const SizedBox(height: 20),
+            JDivider(color: customColors.primary),
+            const SizedBox(height: 20),
+            const ShimmerWidget.rectangular(height: 18, width: 50),
+            const SizedBox(height: 10),
+          ],
+        ),
+      ),
     );
   }
 }

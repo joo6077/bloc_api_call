@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:comento_task/application/enums/order_enum.dart';
 import 'package:comento_task/domain/models/category_item_model.dart';
 import 'package:comento_task/presentation/list/bloc/list/list_bloc.dart';
 import 'package:flutter/material.dart';

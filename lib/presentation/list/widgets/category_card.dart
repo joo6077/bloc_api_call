@@ -1,4 +1,6 @@
 import 'package:comento_task/application/styles/j_theme.dart';
+import 'package:comento_task/presentation/widgets/shimmer.dart';
+import 'package:comento_task/presentation/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:comento_task/application/styles/common.dart';
@@ -30,7 +32,7 @@ class CategoryCard extends StatelessWidget {
     return Column(
       children: [
         Container(
-          color: Colors.white,
+          color: customColors.surface,
           child: Material(
             color: Colors.transparent,
             child: InkWell(
@@ -86,6 +88,48 @@ class CategoryCard extends StatelessWidget {
         ),
         const SizedBox(height: 10),
       ],
+    );
+  }
+}
+
+class CategoryCardShimmer extends StatelessWidget {
+  const CategoryCardShimmer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final customColors = Theme.of(context).extension<CustomColors>()!;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Container(
+        color: customColors.surface,
+        child: Padding(
+          padding: horizontalPadding,
+          child: Shimmer(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    ShimmerWidget.rectangular(height: 16, width: 50),
+                    ShimmerWidget.rectangular(height: 16, width: 50),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                const JDivider(),
+                const SizedBox(height: 15),
+                const ShimmerWidget.rectangular(height: 16, width: 50),
+                const SizedBox(height: 16),
+                const ShimmerWidget.rectangular(height: 20),
+                const SizedBox(height: 15),
+                const ShimmerWidget.rectangular(height: 16),
+                const SizedBox(height: 20),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

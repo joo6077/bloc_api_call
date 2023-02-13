@@ -1,4 +1,7 @@
+import 'package:comento_task/application/styles/common.dart';
 import 'package:comento_task/application/utils/primary_extension.dart';
+import 'package:comento_task/presentation/widgets/shimmer.dart';
+import 'package:comento_task/presentation/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:comento_task/application/styles/j_theme.dart';
@@ -49,6 +52,40 @@ class DetailAnswer extends StatelessWidget {
         const SizedBox(height: 15),
         const JDivider(),
       ],
+    );
+  }
+}
+
+class DetailAnswerShimmer extends StatelessWidget {
+  const DetailAnswerShimmer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: horizontalPadding,
+      child: Shimmer(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            JDivider(),
+            SizedBox(height: 20),
+            ShimmerWidget.rectangular(height: 16, width: 150),
+            SizedBox(height: 10),
+            JDivider(),
+            SizedBox(height: 20),
+            ShimmerWidget.rectangular(height: 16),
+            SizedBox(height: 5),
+            ShimmerWidget.rectangular(height: 16),
+            SizedBox(height: 5),
+            ShimmerWidget.rectangular(height: 16),
+            SizedBox(height: 15),
+            ShimmerWidget.rectangular(height: 16, width: 100),
+            SizedBox(height: 15),
+            JDivider(),
+            SizedBox(height: 20),
+          ],
+        ),
+      ),
     );
   }
 }

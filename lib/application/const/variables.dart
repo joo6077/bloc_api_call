@@ -7,5 +7,6 @@ const String TEXT_SPONSOR = 'sponsor';
 const String TEXT_ADS = '광고 가리기';
 const String TEXT_POST = '게시판';
 const String TEXT_LIMIT = '개씩 보기';
+const String TEXT_IMAGE_LOADING = '이미지 로딩 에러';
 
 const String IMAGE_PATH = 'https://cdn.comento.kr/assignment/';
