@@ -108,9 +108,11 @@ class _FilterModalState extends State<FilterModal> {
               padding: const EdgeInsets.symmetric(vertical: 8),
               label: TEXT_SAVE,
               onTap: () {
-                widget.rootContext
-                    .read<ListBloc>()
-                    .add(GetListEvent(categoryIds: categoryIds));
+                if (categoryIds.isNotEmpty) {
+                  widget.rootContext
+                      .read<ListBloc>()
+                      .add(GetListEvent(categoryIds: categoryIds));
+                }
                 widget.onSave();
               },
             ),

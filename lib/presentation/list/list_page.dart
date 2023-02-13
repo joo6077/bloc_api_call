@@ -9,7 +9,9 @@ import 'package:comento_task/presentation/list/bloc/list/list_bloc.dart';
 import 'package:comento_task/presentation/list/widgets/advertisement_card.dart';
 import 'package:comento_task/presentation/list/widgets/category_card.dart';
 import 'package:comento_task/presentation/list/widgets/list_header.dart';
+import 'package:comento_task/presentation/widgets/shimmer.dart';
 import 'package:comento_task/presentation/widgets/j_pagination.dart';
+import 'package:comento_task/presentation/widgets/shimmer_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,12 +29,21 @@ class _ListPageState extends State<ListPage> {
   bool isAds = false;
   bool isPost = false;
   late final listBloc = context.read<ListBloc>();
+  late final categoryBloc = context.read<CategoryBloc>();
 
   @override
   void initState() {
-    listBloc.add(GetListEvent(
-        categoryIds: const [1, 2, 3], page: 1, limit: limit, ord: ord));
-    context.read<CategoryBloc>().add(GetCategoryEvent());
+    categoryBloc.add(GetCategoryEvent());
+    categoryBloc.stream
+        .firstWhere((element) => element is LoadedCategoryState)
+        .then((state) {
+      final categoryState = state as LoadedCategoryState;
+      listBloc.add(GetListEvent(
+          categoryIds: categoryState.categoryIdsAll,
+          page: 1,
+          limit: limit,
+          ord: ord));
+    });
 
     scrollController.addListener(() {
       if (!isPost) {
@@ -122,8 +133,10 @@ class _ListPageState extends State<ListPage> {
                             Switch(
                                 value: isPost,
                                 onChanged: (value) {
+                                  final categoryState =
+                                      categoryBloc.state as LoadedCategoryState;
                                   listBloc.add(GetListEvent(
-                                      categoryIds: const [1, 2, 3],
+                                      categoryIds: categoryState.categoryIdsAll,
                                       page: 1,
                                       limit: limit,
                                       ord: ord));
@@ -148,8 +161,10 @@ class _ListPageState extends State<ListPage> {
                                 ],
                                 onChanged: (value) {
                                   limit = value!;
+                                  final categoryState =
+                                      categoryBloc.state as LoadedCategoryState;
                                   listBloc.add(GetListEvent(
-                                      categoryIds: const [1, 2, 3],
+                                      categoryIds: categoryState.categoryIdsAll,
                                       page: 1,
                                       limit: limit,
                                       ord: ord));
