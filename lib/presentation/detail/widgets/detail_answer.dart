@@ -19,6 +19,7 @@ class DetailAnswer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final customColors = Theme.of(context).extension<CustomColors>()!;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,7 +29,7 @@ class DetailAnswer extends StatelessWidget {
         const SizedBox(height: 20),
         Text(
           replyUserName,
-          style: textTheme.bodyMedium!.copyWith(color: Colors.grey),
+          style: textTheme.titleMedium!.copyWith(color: customColors.font2),
         ),
         const SizedBox(height: 10),
         const JDivider(),

@@ -42,16 +42,14 @@ class DetailHeader extends StatelessWidget {
         const SizedBox(height: 15),
         Text(
           createdAt.timeFormat(),
-          style: textTheme.titleSmall,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
+          style: textTheme.titleSmall!.copyWith(color: customColors.font4),
         ),
         const SizedBox(height: 15),
         JDivider(color: customColors.primary),
         const SizedBox(height: 20),
         Text(
           '$TEXT_ANSWER $replyCount',
-          style: textTheme.titleMedium!.copyWith(color: Colors.black),
+          style: textTheme.titleMedium!.copyWith(color: customColors.font1),
         ),
       ],
     );

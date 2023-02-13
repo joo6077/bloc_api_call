@@ -7,7 +7,7 @@ class JButton extends StatelessWidget {
   final double? fontSize;
   final Color? backgroundColor;
   final Color? borderColor;
-  final Color? labelColor;
+  final Color? fontColor;
 
   const JButton({
     Key? key,
@@ -17,7 +17,7 @@ class JButton extends StatelessWidget {
     this.fontSize,
     this.backgroundColor,
     this.borderColor,
-    this.labelColor,
+    this.fontColor,
   }) : super(key: key);
 
   @override
@@ -43,7 +43,7 @@ class JButton extends StatelessWidget {
                 label,
                 style: TextStyle(
                   fontSize: fontSize,
-                  color: labelColor ?? Colors.grey[700]!,
+                  color: fontColor ?? Colors.grey[700]!,
                 ),
               ),
             ),

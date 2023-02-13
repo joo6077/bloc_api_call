@@ -1,3 +1,4 @@
+import 'package:comento_task/application/styles/j_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:comento_task/application/styles/common.dart';
@@ -24,12 +25,14 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final customColors = Theme.of(context).extension<CustomColors>()!;
 
     return Column(
       children: [
         Container(
           color: Colors.white,
           child: Material(
+            color: Colors.transparent,
             child: InkWell(
               onTap: () => onTap(),
               child: Padding(
@@ -43,12 +46,12 @@ class CategoryCard extends StatelessWidget {
                       children: [
                         Text(
                           name,
-                          style: textTheme.titleSmall!
-                              .copyWith(color: Colors.black),
+                          style: textTheme.titleSmall!,
                         ),
                         Text(
                           id,
-                          style: textTheme.titleSmall,
+                          style: textTheme.titleSmall!
+                              .copyWith(color: customColors.font4),
                         ),
                       ],
                     ),
@@ -57,9 +60,10 @@ class CategoryCard extends StatelessWidget {
                     const SizedBox(height: 15),
                     Text(
                       userId,
-                      style: textTheme.bodyMedium,
+                      style: textTheme.titleSmall!
+                          .copyWith(color: customColors.font1),
                     ),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 16),
                     Text(
                       title,
                       style: textTheme.titleLarge,
@@ -69,7 +73,7 @@ class CategoryCard extends StatelessWidget {
                     const SizedBox(height: 15),
                     Text(
                       content,
-                      style: textTheme.bodyLarge,
+                      style: textTheme.titleMedium,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),

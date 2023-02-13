@@ -53,6 +53,9 @@ class _ListHeaderState extends State<ListHeader> {
                   items: _orderList,
                 ),
                 JButton(
+                  fontSize: 13,
+                  fontColor: customColors.font4,
+                  borderColor: customColors.font3,
                   label: TEXT_FILTER,
                   onTap: () => _modalController.showModal(context),
                 ),

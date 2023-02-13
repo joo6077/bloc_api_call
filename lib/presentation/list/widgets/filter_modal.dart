@@ -49,9 +49,10 @@ class _FilterModalState extends State<FilterModal> {
             child: Padding(
               padding: const EdgeInsets.only(top: 8.0, right: 8.0),
               child: Material(
+                color: Colors.transparent,
                 child: InkWell(
                   onTap: () => widget.onClose(),
-                  child: Icon(Icons.clear, color: customColors.disable),
+                  child: Icon(Icons.clear, color: customColors.font4),
                 ),
               ),
             ),
@@ -100,8 +101,8 @@ class _FilterModalState extends State<FilterModal> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: JButton(
-              fontSize: 20,
-              labelColor: customColors.surface,
+              fontSize: 16,
+              fontColor: customColors.surface,
               borderColor: Colors.transparent,
               backgroundColor: customColors.primary,
               padding: const EdgeInsets.symmetric(vertical: 8),

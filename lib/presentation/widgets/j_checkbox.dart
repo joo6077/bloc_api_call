@@ -30,6 +30,7 @@ class _JCheckboxState<T> extends State<JCheckbox<T>> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     final customColors = Theme.of(context).extension<CustomColors>()!;
 
     return Column(
@@ -39,6 +40,7 @@ class _JCheckboxState<T> extends State<JCheckbox<T>> {
               padding: EdgeInsets.only(
                   bottom: index != widget.items.length - 1 ? 10 : 0),
               child: Material(
+                color: Colors.transparent,
                 child: InkWell(
                   onTap: () => _selectItem(index),
                   child: Row(
@@ -52,8 +54,8 @@ class _JCheckboxState<T> extends State<JCheckbox<T>> {
                               : customColors.surface,
                           borderRadius:
                               const BorderRadius.all(Radius.circular(1)),
-                          border: Border.all(
-                              color: customColors.disable!, width: 1),
+                          border:
+                              Border.all(color: customColors.font3!, width: 1),
                         ),
                         child: item.isSelected
                             ? Icon(
@@ -64,7 +66,11 @@ class _JCheckboxState<T> extends State<JCheckbox<T>> {
                             : const SizedBox(),
                       ),
                       const SizedBox(width: 15),
-                      Text(item.name),
+                      Text(
+                        item.name,
+                        style: textTheme.titleMedium!
+                            .copyWith(color: customColors.font1),
+                      ),
                     ],
                   ),
                 ),

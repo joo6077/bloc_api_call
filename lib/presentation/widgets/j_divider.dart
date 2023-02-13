@@ -1,3 +1,4 @@
+import 'package:comento_task/application/styles/j_theme.dart';
 import 'package:flutter/material.dart';
 
 class JDivider extends StatelessWidget {
@@ -11,11 +12,12 @@ class JDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = MediaQuery.of(context).size;
+    final customColors = Theme.of(context).extension<CustomColors>()!;
 
     return Container(
       height: 1,
       width: s.width,
-      color: color ?? Colors.grey[350],
+      color: color ?? customColors.font3,
     );
   }
 }

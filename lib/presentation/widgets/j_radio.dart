@@ -42,13 +42,14 @@ class _JRadioState<T> extends State<JRadio<T>> {
               padding: EdgeInsets.only(
                   right: index != widget.items.length - 1 ? 10 : 0),
               child: Material(
+                color: Colors.transparent,
                 child: InkWell(
                   onTap: () => _changeItem(index, item),
                   child: Row(
                     children: [
                       Container(
-                        width: 7.5,
-                        height: 7.5,
+                        width: 6,
+                        height: 6,
                         decoration: BoxDecoration(
                           color: item.isSelected
                               ? customColors.primary
@@ -60,9 +61,10 @@ class _JRadioState<T> extends State<JRadio<T>> {
                       Text(
                         item.name,
                         style: TextStyle(
+                          fontSize: 13,
                           color: item.isSelected
-                              ? Colors.black
-                              : customColors.disable,
+                              ? customColors.font1
+                              : customColors.font4,
                         ),
                       ),
                     ],
