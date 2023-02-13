@@ -1,8 +1,10 @@
 import 'package:comento_task/application/const/variables.dart';
 import 'package:comento_task/application/enums/order_enum.dart';
 import 'package:comento_task/application/styles/j_theme.dart';
+import 'package:comento_task/domain/models/category_item_model.dart';
 import 'package:comento_task/presentation/detail/bloc/detail_bloc.dart';
 import 'package:comento_task/presentation/detail/detail_page.dart';
+import 'package:comento_task/presentation/list/bloc/category/category_bloc.dart';
 import 'package:comento_task/presentation/list/bloc/list/list_bloc.dart';
 import 'package:comento_task/presentation/list/widgets/advertisement_card.dart';
 import 'package:comento_task/presentation/list/widgets/category_card.dart';
@@ -23,16 +25,17 @@ class _ListPageState extends State<ListPage> {
   int limit = 5;
   String ord = OrderEnum.asc.value;
   bool isAds = false;
-  bool isPagination = true;
+  bool isPost = false;
+  late final listBloc = context.read<ListBloc>();
 
   @override
   void initState() {
-    final listBloc = context.read<ListBloc>();
     listBloc.add(GetListEvent(
         categoryIds: const [1, 2, 3], page: 1, limit: limit, ord: ord));
+    context.read<CategoryBloc>().add(GetCategoryEvent());
 
     scrollController.addListener(() {
-      if (!isPagination) {
+      if (!isPost) {
         if (!(listBloc.state as LoadedListState).hasReachedMax) {
           if (scrollController.position.maxScrollExtent ==
               scrollController.offset) {
@@ -49,6 +52,18 @@ class _ListPageState extends State<ListPage> {
   void dispose() {
     scrollController.dispose();
     super.dispose();
+  }
+
+  String _categoryIdToName(int id) {
+    final categoryState = context.watch<CategoryBloc>().state;
+    if (categoryState is LoadedCategoryState) {
+      for (var element in categoryState.categories) {
+        if (id == element.id) {
+          return element.name;
+        }
+      }
+    }
+    return id.toString();
   }
 
   @override
@@ -68,7 +83,7 @@ class _ListPageState extends State<ListPage> {
               slivers: [
                 SliverAppBar(
                   floating: true,
-                  toolbarHeight: 91,
+                  toolbarHeight: 191,
                   flexibleSpace: FlexibleSpaceBar(
                       background: Container(
                     color: customColors.surface,
@@ -92,6 +107,60 @@ class _ListPageState extends State<ListPage> {
                                     isAds = value;
                                   });
                                 }),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                TEXT_POST,
+                                style: textTheme.bodyLarge,
+                              ),
+                            ),
+                            Switch(
+                                value: isPost,
+                                onChanged: (value) {
+                                  listBloc.add(GetListEvent(
+                                      categoryIds: const [1, 2, 3],
+                                      page: 1,
+                                      limit: limit,
+                                      ord: ord));
+                                  setState(() {
+                                    isPost = value;
+                                  });
+                                }),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const SizedBox(width: 10),
+                            DropdownButton<int>(
+                                value: limit,
+                                items: const [
+                                  DropdownMenuItem<int>(
+                                      value: 5, child: Text('5')),
+                                  DropdownMenuItem<int>(
+                                      value: 10, child: Text('10')),
+                                  DropdownMenuItem<int>(
+                                      value: 15, child: Text('15')),
+                                ],
+                                onChanged: (value) {
+                                  limit = value!;
+                                  listBloc.add(GetListEvent(
+                                      categoryIds: const [1, 2, 3],
+                                      page: 1,
+                                      limit: limit,
+                                      ord: ord));
+                                }),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                TEXT_LIMIT,
+                                style: textTheme.bodyLarge,
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -121,7 +190,7 @@ class _ListPageState extends State<ListPage> {
                                 final listsItem =
                                     state.lists[state.numbers[index]];
                                 return CategoryCard(
-                                  name: listsItem.categoryId.toString(),
+                                  name: _categoryIdToName(listsItem.categoryId),
                                   id: listsItem.id.toString(),
                                   userId: listsItem.userId.toString(),
                                   title: listsItem.title.toString(),
@@ -139,19 +208,18 @@ class _ListPageState extends State<ListPage> {
                                 );
                               }
                             } else {
-                              return isPagination
+                              return isPost
                                   ? JPagination(
                                       items: state.links,
                                       onTap: (value) {
-                                        context.read<ListBloc>().add(
-                                            GetListEvent(
-                                                page: value, limit: limit));
+                                        listBloc.add(GetListEvent(
+                                            page: value, limit: limit));
                                       })
                                   : Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 32),
                                       child: state.hasReachedMax
-                                          ? const Text('end')
+                                          ? const SizedBox()
                                           : const Center(
                                               child:
                                                   CircularProgressIndicator()),

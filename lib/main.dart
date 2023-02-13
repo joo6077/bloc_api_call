@@ -4,6 +4,7 @@ import 'package:comento_task/domain/api/client.dart';
 import 'package:comento_task/domain/dataSources/comento_remote_data_source.dart';
 import 'package:comento_task/domain/repositories/comento_repository.dart';
 import 'package:comento_task/presentation/detail/bloc/detail_bloc.dart';
+import 'package:comento_task/presentation/list/bloc/category/category_bloc.dart';
 import 'package:comento_task/presentation/list/bloc/list/list_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,9 @@ void main() {
               create: (context) => ListBloc(context.read<ListRepository>())),
           BlocProvider(
               create: (context) => DetailBloc(context.read<ListRepository>())),
+          BlocProvider(
+              create: (context) =>
+                  CategoryBloc(context.read<ListRepository>())),
         ],
         child: MaterialApp(
           theme: ThemeData.light().copyWith(

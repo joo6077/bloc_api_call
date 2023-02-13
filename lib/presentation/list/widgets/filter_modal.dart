@@ -34,15 +34,10 @@ class _FilterModalState extends State<FilterModal> {
   List<int> categoryIds = [];
 
   @override
-  void initState() {
-    context.read<CategoryBloc>().add(GetCategoryEvent());
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final customColors = Theme.of(context).extension<CustomColors>()!;
+    final categoryState = widget.rootContext.watch<CategoryBloc>().state;
 
     return JModal(
       body: Column(
@@ -73,11 +68,11 @@ class _FilterModalState extends State<FilterModal> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: BlocBuilder<CategoryBloc, CategoryState>(
-              builder: (_, state) {
-                if (state is LoadedCategoryState) {
+            child: Builder(
+              builder: (_) {
+                if (categoryState is LoadedCategoryState) {
                   final List<JOptionType<CategoryModel>> filters = [];
-                  for (var element in state.categories) {
+                  for (var element in categoryState.categories) {
                     filters.add(JOptionType<CategoryModel>(
                         name: element.name.toString(),
                         isSelected: false,

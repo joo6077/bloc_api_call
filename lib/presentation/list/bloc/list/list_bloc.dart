@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
@@ -20,14 +18,14 @@ class ListBloc extends Bloc<ListEvent, ListState> {
   final ListRepository _listRepository;
 
   ListPagination _listPagination = ListPagination(
-      categoryIds: [1, 2, 3], page: 1, limit: 10, ord: OrderEnum.asc.value);
+      categoryIds: [1, 2, 3], page: 1, limit: 5, ord: OrderEnum.asc.value);
   Pagination _adsPagination = Pagination(page: 1, limit: 3);
 
   NumberHistory _numberHistory = NumberHistory(
       cardEnum: CardEnum.list, lastListNumber: 0, lastAdsNumber: 0);
 
   void _reset() {
-    _listPagination = _listPagination.copyWith(page: 1, limit: 10);
+    _listPagination = _listPagination.copyWith(page: 1);
     _numberHistory = NumberHistory(
         cardEnum: CardEnum.list, lastListNumber: 0, lastAdsNumber: 0);
   }
@@ -35,8 +33,6 @@ class ListBloc extends Bloc<ListEvent, ListState> {
   Future<FetchResult> _fetch({required int page, required int length}) async {
     final listResult = await _listRepository.getList(_listPagination);
     final linkResult = listResult.data.links;
-
-    inspect(linkResult);
 
     final numbersInfo =
         _generateListNthAds(listResult.data.data.length, length: length);
