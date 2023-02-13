@@ -25,12 +25,14 @@ class LoadedListState extends ListState {
   final List<int> numbers;
   final List<ListModel> lists;
   final List<AdsModel> ads;
+  final List<LinkModel> links;
   final bool hasReachedMax;
 
   const LoadedListState({
     required this.numbers,
     required this.lists,
     required this.ads,
+    required this.links,
     this.hasReachedMax = false,
   });
 
@@ -38,11 +40,15 @@ class LoadedListState extends ListState {
     List<int>? numbers,
     List<ListModel>? lists,
     List<AdsModel>? ads,
+    List<LinkModel>? links,
+    bool? hasReachedMax,
   }) {
     return LoadedListState(
       numbers: numbers ?? this.numbers,
       lists: lists ?? this.lists,
       ads: ads ?? this.ads,
+      links: links ?? this.links,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
     );
   }
 

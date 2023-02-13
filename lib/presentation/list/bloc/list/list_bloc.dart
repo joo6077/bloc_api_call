@@ -9,6 +9,7 @@ import 'package:comento_task/application/class/pagination.dart';
 import 'package:comento_task/application/enums/card_enum.dart';
 import 'package:comento_task/application/enums/order_enum.dart';
 import 'package:comento_task/domain/models/ads_model.dart';
+import 'package:comento_task/domain/models/link_model.dart';
 import 'package:comento_task/domain/models/list_model.dart';
 import 'package:comento_task/domain/repositories/comento_repository.dart';
 
@@ -32,8 +33,10 @@ class ListBloc extends Bloc<ListEvent, ListState> {
   }
 
   Future<FetchResult> _fetch({required int page, required int length}) async {
-    inspect(_listPagination);
     final listResult = await _listRepository.getList(_listPagination);
+    final linkResult = listResult.data.links;
+
+    inspect(linkResult);
 
     final numbersInfo =
         _generateListNthAds(listResult.data.data.length, length: length);
@@ -46,6 +49,7 @@ class ListBloc extends Bloc<ListEvent, ListState> {
         numbers: numbersInfo.numbers,
         lists: listResult.data.data,
         ads: adsResult.data.data,
+        links: linkResult,
         hasReachedMax: listResult.data.to == listResult.data.total);
   }
 
@@ -115,10 +119,12 @@ class ListBloc extends Bloc<ListEvent, ListState> {
       final result = await _fetch(page: _listPagination.page, length: 0);
 
       emit(LoadedListState(
-          lists: result.lists,
-          numbers: result.numbers,
-          ads: result.ads,
-          hasReachedMax: result.hasReachedMax));
+        lists: result.lists,
+        numbers: result.numbers,
+        ads: result.ads,
+        links: result.links,
+        hasReachedMax: result.hasReachedMax,
+      ));
     });
 
     on<AddListEvent>((event, emit) async {
@@ -134,6 +140,7 @@ class ListBloc extends Bloc<ListEvent, ListState> {
         numbers: currentState.numbers + result.numbers,
         lists: currentState.lists + result.lists,
         ads: currentState.ads + result.ads,
+        links: result.links,
         hasReachedMax: result.hasReachedMax,
       ));
     });
@@ -144,12 +151,14 @@ class FetchResult {
   final List<int> numbers;
   final List<ListModel> lists;
   final List<AdsModel> ads;
+  final List<LinkModel> links;
   final bool hasReachedMax;
 
   FetchResult({
     required this.numbers,
     required this.lists,
     required this.ads,
+    required this.links,
     required this.hasReachedMax,
   });
 }

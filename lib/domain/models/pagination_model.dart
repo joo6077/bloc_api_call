@@ -15,7 +15,7 @@ class PaginationModel<T> {
   final int lastPage;
   @JsonKey(name: 'last_page_url')
   final String lastPageUrl;
-  final List<LinkModel>? links;
+  final List<LinkModel> links;
   @JsonKey(name: 'next_page_url')
   final String? nextPageUrl;
   final String path;
@@ -33,7 +33,7 @@ class PaginationModel<T> {
       required this.from,
       required this.lastPage,
       required this.lastPageUrl,
-      this.links,
+      required this.links,
       required this.nextPageUrl,
       required this.path,
       required this.perPage,

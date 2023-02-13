@@ -17,8 +17,8 @@ PaginationModel<T> _$PaginationModelFromJson<T>(
       from: json['from'] as int?,
       lastPage: json['last_page'] as int,
       lastPageUrl: json['last_page_url'] as String,
-      links: (json['links'] as List<dynamic>?)
-          ?.map((e) => LinkModel.fromJson(e as Map<String, dynamic>))
+      links: (json['links'] as List<dynamic>)
+          .map((e) => LinkModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       nextPageUrl: json['next_page_url'] as String?,
       path: json['path'] as String,

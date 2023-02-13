@@ -7,6 +7,7 @@ import 'package:comento_task/presentation/list/bloc/list/list_bloc.dart';
 import 'package:comento_task/presentation/list/widgets/advertisement_card.dart';
 import 'package:comento_task/presentation/list/widgets/category_card.dart';
 import 'package:comento_task/presentation/list/widgets/list_header.dart';
+import 'package:comento_task/presentation/widgets/j_pagination.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,8 +20,10 @@ class ListPage extends StatefulWidget {
 
 class _ListPageState extends State<ListPage> {
   final scrollController = ScrollController();
-  int limit = 10;
+  int limit = 5;
   String ord = OrderEnum.asc.value;
+  bool isAds = false;
+  bool isPagination = true;
 
   @override
   void initState() {
@@ -29,10 +32,12 @@ class _ListPageState extends State<ListPage> {
         categoryIds: const [1, 2, 3], page: 1, limit: limit, ord: ord));
 
     scrollController.addListener(() {
-      if (!(listBloc.state as LoadedListState).hasReachedMax) {
-        if (scrollController.position.maxScrollExtent ==
-            scrollController.offset) {
-          listBloc.add(AddListEvent());
+      if (!isPagination) {
+        if (!(listBloc.state as LoadedListState).hasReachedMax) {
+          if (scrollController.position.maxScrollExtent ==
+              scrollController.offset) {
+            listBloc.add(AddListEvent());
+          }
         }
       }
     });
@@ -61,10 +66,37 @@ class _ListPageState extends State<ListPage> {
             child: CustomScrollView(
               controller: scrollController,
               slivers: [
-                const SliverAppBar(
+                SliverAppBar(
                   floating: true,
-                  toolbarHeight: 41,
-                  flexibleSpace: FlexibleSpaceBar(background: ListHeader()),
+                  toolbarHeight: 91,
+                  flexibleSpace: FlexibleSpaceBar(
+                      background: Container(
+                    color: customColors.surface,
+                    child: Column(
+                      children: [
+                        const ListHeader(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                TEXT_ADS,
+                                style: textTheme.bodyLarge,
+                              ),
+                            ),
+                            Switch(
+                                value: isAds,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isAds = value;
+                                  });
+                                }),
+                          ],
+                        ),
+                      ],
+                    ),
+                  )),
                 ),
                 SliverList(
                   delegate: state is LoadedListState
@@ -76,11 +108,13 @@ class _ListPageState extends State<ListPage> {
                                 if (state.ads.length > state.numbers[index]) {
                                   final adsItem =
                                       state.ads[state.numbers[index]];
-                                  return AdvertisementCard(
-                                    title: adsItem.title,
-                                    content: adsItem.contents,
-                                    imageUrl: IMAGE_PATH + adsItem.img,
-                                  );
+                                  return isAds
+                                      ? const SizedBox()
+                                      : AdvertisementCard(
+                                          title: adsItem.title,
+                                          content: adsItem.contents,
+                                          imageUrl: IMAGE_PATH + adsItem.img,
+                                        );
                                 }
                                 return const SizedBox();
                               } else {
@@ -105,14 +139,23 @@ class _ListPageState extends State<ListPage> {
                                 );
                               }
                             } else {
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 32),
-                                child: state.hasReachedMax
-                                    ? const Text('end')
-                                    : const Center(
-                                        child: CircularProgressIndicator()),
-                              );
+                              return isPagination
+                                  ? JPagination(
+                                      items: state.links,
+                                      onTap: (value) {
+                                        context.read<ListBloc>().add(
+                                            GetListEvent(
+                                                page: value, limit: limit));
+                                      })
+                                  : Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 32),
+                                      child: state.hasReachedMax
+                                          ? const Text('end')
+                                          : const Center(
+                                              child:
+                                                  CircularProgressIndicator()),
+                                    );
                             }
                           },
                         )

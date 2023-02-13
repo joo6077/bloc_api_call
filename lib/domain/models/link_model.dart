@@ -6,7 +6,7 @@ part 'link_model.g.dart';
 class LinkModel {
   final String? url;
   final dynamic label;
-  final bool? active;
+  final bool active;
 
   const LinkModel({required this.url, this.label, required this.active});
 
