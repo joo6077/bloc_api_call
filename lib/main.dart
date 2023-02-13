@@ -1,7 +1,6 @@
 import 'package:comento_task/application/app.dart';
 import 'package:comento_task/application/styles/j_theme.dart';
-import 'package:comento_task/domain/api/client.dart';
-import 'package:comento_task/domain/dataSources/comento_remote_data_source.dart';
+import 'package:comento_task/domain/dataSources/client.dart';
 import 'package:comento_task/domain/repositories/comento_repository.dart';
 import 'package:comento_task/presentation/detail/bloc/detail_bloc.dart';
 import 'package:comento_task/presentation/list/bloc/category/category_bloc.dart';
@@ -12,11 +11,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   final dio = Dio(BaseOptions(headers: {'Accept': 'application/json'}));
-  final comentoRemoteDataSource = ComentoRemoteDataSource(client: Client(dio));
+  final client = Client(dio);
 
   runApp(
     RepositoryProvider(
-      create: (context) => ListRepository(comentoRemoteDataSource),
+      create: (context) => ListRepository(client),
       child: MultiBlocProvider(
         providers: [
           BlocProvider(

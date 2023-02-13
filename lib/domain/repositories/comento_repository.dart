@@ -1,6 +1,6 @@
 import 'package:comento_task/application/class/list_pagination.dart';
 import 'package:comento_task/application/class/pagination.dart';
-import 'package:comento_task/domain/dataSources/comento_remote_data_source.dart';
+import 'package:comento_task/domain/dataSources/client.dart';
 import 'package:comento_task/domain/models/ads_model.dart';
 import 'package:comento_task/domain/models/category_item_model.dart';
 import 'package:comento_task/domain/models/data.dart';
@@ -11,22 +11,22 @@ import 'package:comento_task/domain/models/pagination_model.dart';
 import 'package:retrofit/dio.dart';
 
 class ListRepository {
-  ComentoRemoteDataSource comentoRemoteDataSource;
+  Client client;
 
-  ListRepository(this.comentoRemoteDataSource);
+  ListRepository(this.client);
 
   Future<HttpResponse<PaginationModel<ListModel>>> getList(
           ListPagination listPagination) =>
-      comentoRemoteDataSource.getList(listPagination.page, listPagination.limit,
-          listPagination.ord, {'id': listPagination.categoryIds});
+      client.getList(listPagination.page, listPagination.ord,
+          {'id': listPagination.categoryIds}, listPagination.limit);
 
   Future<HttpResponse<PaginationModel<AdsModel>>> getAds(
           Pagination adsPagination) =>
-      comentoRemoteDataSource.getAds(adsPagination.page, adsPagination.limit);
+      client.getAds(adsPagination.page, adsPagination.limit);
 
   Future<HttpResponse<DataList<CategoryModel>>> getFilterCategory() =>
-      comentoRemoteDataSource.getFilterCategory();
+      client.getFilterCategory();
 
   Future<HttpResponse<Data<DetailModel>>> getDetail(int id) =>
-      comentoRemoteDataSource.getDetail(id);
+      client.getDetail(id);
 }
