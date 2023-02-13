@@ -1,7 +1,36 @@
 # comento_task
 
 ## 1. 프로젝트 구조
-
+```
+.
+└── lib/    
+    ├── application/       앱 전반적으로 사용되는 유틸
+    │   ├── class
+    │   ├── const
+    │   ├── enums
+    │   ├── styles
+    │   ├── types
+    │   ├── utils
+    │   └── app.dart
+    ├── domain/    
+    │   ├── dataSources       api 엔트리 포인트 담당
+    │   ├── models       데이터 모델 담당
+    │   └── repositories       데이터를 저장하고 불러오는 로직 담당
+    └── presentation/       
+        ├── detail/
+        │   ├── bloc       리포지토리로 받아온 데이터를 뷰에 상태 및 이벤트 적용
+        │   ├── widgets       detail에 쓰이는 위젯들
+        │   └── detail_page.dart
+        ├── list/
+        │   ├── bloc/       리포지토리로 받아온 데이터를 뷰에 상태 및 이벤트 적용
+        │   │   ├── category
+        │   │   └── list
+        │   ├── controllers       뷰 컨트롤러
+        │   ├── widgets       list에 쓰이는 위젯들
+        │   └── list_page.dart
+        └── widgets       프로젝트 공통으로 쓰이는 위젯들
+```
+프로젝트를 최대한 서로 의존하는 부분 없지만 간단하게 설계하려고 노력했습니다.
 
 ## 2. 강조하고 싶은 부분
 - UI에 사용되는 모든 위젯 button, modal, pagination, radio, checkbox를 직접 개발했습니다.
@@ -11,3 +40,10 @@
 - 사용자 편의성을 위해 임의로 상세 페이지에 뒤로가기 버튼을 적용했습니다.
 - 사용자 경험 향상을 위해 splash 효과를 주었습니다.
 - 고객센터 대응 -> 광고 가리기, 게시판, 스켈레톤 로딩을 구현했습니다.
+
+## 3. 소감
+이번 과제를 진행하면서 처음으로 Bloc을 사용했습니다. 원래 익숙한 provider를 사용하려했지만 
+평소에 Bloc에 관심이 있었으며, 새로운 것을 배우고자 Bloc을 도입했습니다. Bloc의 많은 기능을 사용해보지 못했지만
+Bloc의 많은 장점(체계화된 state, event 관리, 다양한 기능을 가진 provider 제공)들을 알아볼 수 있어 뜻 깊은 과제였습니다.
+또 여타 다른 과제와 달리 어떻게하면 효율적으로 코드를 짜야할 지 고민하게 만드는 훌륭한 과제였습니다.
+이 번 과제를 통해 새로운 것을 배우고 코드 품질에 대해 생각할 수 있는 기회를 주셔서 정말 감사합니다.
