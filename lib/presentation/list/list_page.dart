@@ -109,6 +109,7 @@ class _ListPageState extends State<ListPage> {
                 SliverAppBar(
                   floating: true,
                   toolbarHeight: 191,
+                  elevation: 1.0,
                   flexibleSpace: FlexibleSpaceBar(
                       background: Container(
                     color: customColors.surface,

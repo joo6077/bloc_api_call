@@ -28,6 +28,7 @@ void main() {
                   CategoryBloc(context.read<ListRepository>())),
         ],
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           theme: ThemeData.light().copyWith(
             extensions: <ThemeExtension<dynamic>>[
               CustomColors.light,
