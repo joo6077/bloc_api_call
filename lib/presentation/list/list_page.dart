@@ -228,11 +228,10 @@ class _ListPageState extends State<ListPage> {
                         },
                       ))
                     : SliverToBoxAdapter(
-                        child: Expanded(
-                            child: Column(
+                        child: Column(
                           children: List.generate(
                               5, (index) => const CategoryCardShimmer()),
-                        )),
+                        ),
                       ),
               ],
             ),
