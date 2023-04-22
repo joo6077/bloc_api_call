@@ -1,15 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:comento_task/application/class/list_pagination.dart';
-import 'package:comento_task/application/class/number_history.dart';
-import 'package:comento_task/application/class/pagination.dart';
-import 'package:comento_task/application/enums/card_enum.dart';
-import 'package:comento_task/application/enums/order_enum.dart';
-import 'package:comento_task/domain/models/ads_model.dart';
-import 'package:comento_task/domain/models/link_model.dart';
-import 'package:comento_task/domain/models/list_model.dart';
-import 'package:comento_task/domain/repositories/comento_repository.dart';
+import 'package:bloc_api_call/application/class/list_pagination.dart';
+import 'package:bloc_api_call/application/class/number_history.dart';
+import 'package:bloc_api_call/application/class/pagination.dart';
+import 'package:bloc_api_call/application/enums/card_enum.dart';
+import 'package:bloc_api_call/application/enums/order_enum.dart';
+import 'package:bloc_api_call/domain/models/ads_model.dart';
+import 'package:bloc_api_call/domain/models/link_model.dart';
+import 'package:bloc_api_call/domain/models/list_model.dart';
+import 'package:bloc_api_call/domain/repositories/comento_repository.dart';
 
 part 'list_event.dart';
 part 'list_state.dart';

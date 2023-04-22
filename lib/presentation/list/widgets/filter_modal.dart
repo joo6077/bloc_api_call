@@ -1,15 +1,15 @@
-import 'package:comento_task/domain/models/category_item_model.dart';
-import 'package:comento_task/presentation/list/bloc/list/list_bloc.dart';
+import 'package:bloc_api_call/domain/models/category_item_model.dart';
+import 'package:bloc_api_call/presentation/list/bloc/list/list_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:comento_task/application/const/variables.dart';
-import 'package:comento_task/application/styles/j_theme.dart';
-import 'package:comento_task/application/types/j_option_type.dart';
-import 'package:comento_task/presentation/list/bloc/category/category_bloc.dart';
-import 'package:comento_task/presentation/widgets/j_button.dart';
-import 'package:comento_task/presentation/widgets/j_checkbox.dart';
-import 'package:comento_task/presentation/widgets/j_modal.dart';
+import 'package:bloc_api_call/application/const/variables.dart';
+import 'package:bloc_api_call/application/styles/j_theme.dart';
+import 'package:bloc_api_call/application/types/j_option_type.dart';
+import 'package:bloc_api_call/presentation/list/bloc/category/category_bloc.dart';
+import 'package:bloc_api_call/presentation/widgets/j_button.dart';
+import 'package:bloc_api_call/presentation/widgets/j_checkbox.dart';
+import 'package:bloc_api_call/presentation/widgets/j_modal.dart';
 
 class FilterModal extends StatefulWidget {
   final Function onClose;

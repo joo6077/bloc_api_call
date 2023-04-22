@@ -1,13 +1,13 @@
-import 'package:comento_task/application/class/list_pagination.dart';
-import 'package:comento_task/application/class/pagination.dart';
-import 'package:comento_task/domain/dataSources/client.dart';
-import 'package:comento_task/domain/models/ads_model.dart';
-import 'package:comento_task/domain/models/category_item_model.dart';
-import 'package:comento_task/domain/models/data.dart';
-import 'package:comento_task/domain/models/data_list.dart';
-import 'package:comento_task/domain/models/detail_model.dart';
-import 'package:comento_task/domain/models/list_model.dart';
-import 'package:comento_task/domain/models/pagination_model.dart';
+import 'package:bloc_api_call/application/class/list_pagination.dart';
+import 'package:bloc_api_call/application/class/pagination.dart';
+import 'package:bloc_api_call/domain/dataSources/client.dart';
+import 'package:bloc_api_call/domain/models/ads_model.dart';
+import 'package:bloc_api_call/domain/models/category_item_model.dart';
+import 'package:bloc_api_call/domain/models/data.dart';
+import 'package:bloc_api_call/domain/models/data_list.dart';
+import 'package:bloc_api_call/domain/models/detail_model.dart';
+import 'package:bloc_api_call/domain/models/list_model.dart';
+import 'package:bloc_api_call/domain/models/pagination_model.dart';
 import 'package:retrofit/dio.dart';
 
 class ListRepository {

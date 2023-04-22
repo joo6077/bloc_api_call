@@ -1,4 +1,4 @@
-import 'package:comento_task/application/enums/card_enum.dart';
+import 'package:bloc_api_call/application/enums/card_enum.dart';
 
 class NumberHistory {
   final CardEnum cardEnum;

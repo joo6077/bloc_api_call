@@ -1,4 +1,4 @@
-import 'package:comento_task/presentation/widgets/shimmer.dart';
+import 'package:bloc_api_call/presentation/widgets/shimmer.dart';
 import 'package:flutter/material.dart';
 
 class ShimmerLoading extends StatefulWidget {

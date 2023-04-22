@@ -1,12 +1,12 @@
-import 'package:comento_task/application/styles/common.dart';
-import 'package:comento_task/application/utils/primary_extension.dart';
-import 'package:comento_task/presentation/widgets/shimmer.dart';
-import 'package:comento_task/presentation/widgets/shimmer_widget.dart';
+import 'package:bloc_api_call/application/styles/common.dart';
+import 'package:bloc_api_call/application/utils/primary_extension.dart';
+import 'package:bloc_api_call/presentation/widgets/shimmer.dart';
+import 'package:bloc_api_call/presentation/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 
-import 'package:comento_task/application/const/variables.dart';
-import 'package:comento_task/application/styles/j_theme.dart';
-import 'package:comento_task/presentation/widgets/j_divider.dart';
+import 'package:bloc_api_call/application/const/variables.dart';
+import 'package:bloc_api_call/application/styles/j_theme.dart';
+import 'package:bloc_api_call/presentation/widgets/j_divider.dart';
 
 class DetailHeader extends StatelessWidget {
   final String title;

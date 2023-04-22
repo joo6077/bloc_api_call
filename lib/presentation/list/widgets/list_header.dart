@@ -1,12 +1,12 @@
-import 'package:comento_task/application/const/variables.dart';
-import 'package:comento_task/application/enums/order_enum.dart';
-import 'package:comento_task/application/styles/j_theme.dart';
-import 'package:comento_task/application/types/j_option_type.dart';
-import 'package:comento_task/presentation/list/bloc/list/list_bloc.dart';
-import 'package:comento_task/presentation/list/controllers/modal_controller.dart';
-import 'package:comento_task/presentation/widgets/j_button.dart';
-import 'package:comento_task/presentation/widgets/j_divider.dart';
-import 'package:comento_task/presentation/widgets/j_radio.dart';
+import 'package:bloc_api_call/application/const/variables.dart';
+import 'package:bloc_api_call/application/enums/order_enum.dart';
+import 'package:bloc_api_call/application/styles/j_theme.dart';
+import 'package:bloc_api_call/application/types/j_option_type.dart';
+import 'package:bloc_api_call/presentation/list/bloc/list/list_bloc.dart';
+import 'package:bloc_api_call/presentation/list/controllers/modal_controller.dart';
+import 'package:bloc_api_call/presentation/widgets/j_button.dart';
+import 'package:bloc_api_call/presentation/widgets/j_divider.dart';
+import 'package:bloc_api_call/presentation/widgets/j_radio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

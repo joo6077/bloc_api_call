@@ -1,4 +1,4 @@
-import 'package:comento_task/domain/models/user_model.dart';
+import 'package:bloc_api_call/domain/models/user_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'reply_model.g.dart';

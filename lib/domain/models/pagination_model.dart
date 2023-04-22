@@ -1,4 +1,4 @@
-import 'package:comento_task/domain/models/link_model.dart';
+import 'package:bloc_api_call/domain/models/link_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pagination_model.g.dart';

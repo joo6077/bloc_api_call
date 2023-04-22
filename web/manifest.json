@@ -1,6 +1,6 @@
 {
-    "name": "comento_task",
-    "short_name": "comento_task",
+    "name": "bloc_api_call",
+    "short_name": "bloc_api_call",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

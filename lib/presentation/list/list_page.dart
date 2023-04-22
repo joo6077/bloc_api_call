@@ -1,12 +1,12 @@
-import 'package:comento_task/application/const/variables.dart';
-import 'package:comento_task/application/enums/order_enum.dart';
-import 'package:comento_task/application/styles/j_theme.dart';
-import 'package:comento_task/presentation/detail/bloc/detail_bloc.dart';
-import 'package:comento_task/presentation/detail/detail_page.dart';
-import 'package:comento_task/presentation/list/bloc/category/category_bloc.dart';
-import 'package:comento_task/presentation/list/bloc/list/list_bloc.dart';
-import 'package:comento_task/presentation/list/widgets/list_header.dart';
-import 'package:comento_task/presentation/widgets/j_pagination.dart';
+import 'package:bloc_api_call/application/const/variables.dart';
+import 'package:bloc_api_call/application/enums/order_enum.dart';
+import 'package:bloc_api_call/application/styles/j_theme.dart';
+import 'package:bloc_api_call/presentation/detail/bloc/detail_bloc.dart';
+import 'package:bloc_api_call/presentation/detail/detail_page.dart';
+import 'package:bloc_api_call/presentation/list/bloc/category/category_bloc.dart';
+import 'package:bloc_api_call/presentation/list/bloc/list/list_bloc.dart';
+import 'package:bloc_api_call/presentation/list/widgets/list_header.dart';
+import 'package:bloc_api_call/presentation/widgets/j_pagination.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

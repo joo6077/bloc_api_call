@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "comento_task" "\0"
+            VALUE "FileDescription", "bloc_api_call" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "comento_task" "\0"
+            VALUE "InternalName", "bloc_api_call" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "comento_task.exe" "\0"
-            VALUE "ProductName", "comento_task" "\0"
+            VALUE "OriginalFilename", "bloc_api_call.exe" "\0"
+            VALUE "ProductName", "bloc_api_call" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

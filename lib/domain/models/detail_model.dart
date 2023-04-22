@@ -1,6 +1,6 @@
-import 'package:comento_task/domain/models/category_item_model.dart';
-import 'package:comento_task/domain/models/reply_model.dart';
-import 'package:comento_task/domain/models/user_model.dart';
+import 'package:bloc_api_call/domain/models/category_item_model.dart';
+import 'package:bloc_api_call/domain/models/reply_model.dart';
+import 'package:bloc_api_call/domain/models/user_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'detail_model.g.dart';

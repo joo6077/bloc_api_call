@@ -1,8 +1,8 @@
-import 'package:comento_task/application/styles/common.dart';
-import 'package:comento_task/application/styles/j_theme.dart';
-import 'package:comento_task/presentation/detail/bloc/detail_bloc.dart';
-import 'package:comento_task/presentation/detail/widgets/detail_answer.dart';
-import 'package:comento_task/presentation/detail/widgets/detail_header.dart';
+import 'package:bloc_api_call/application/styles/common.dart';
+import 'package:bloc_api_call/application/styles/j_theme.dart';
+import 'package:bloc_api_call/presentation/detail/bloc/detail_bloc.dart';
+import 'package:bloc_api_call/presentation/detail/widgets/detail_answer.dart';
+import 'package:bloc_api_call/presentation/detail/widgets/detail_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

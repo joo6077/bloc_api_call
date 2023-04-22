@@ -1,8 +1,8 @@
-import 'package:comento_task/application/const/variables.dart';
-import 'package:comento_task/application/styles/j_theme.dart';
+import 'package:bloc_api_call/application/const/variables.dart';
+import 'package:bloc_api_call/application/styles/j_theme.dart';
 import 'package:flutter/material.dart';
 
-import 'package:comento_task/application/styles/common.dart';
+import 'package:bloc_api_call/application/styles/common.dart';
 
 class AdvertisementCard extends StatelessWidget {
   final String title;

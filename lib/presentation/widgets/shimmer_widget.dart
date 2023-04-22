@@ -1,5 +1,5 @@
-import 'package:comento_task/application/styles/j_theme.dart';
-import 'package:comento_task/presentation/widgets/shimmer_loading.dart';
+import 'package:bloc_api_call/application/styles/j_theme.dart';
+import 'package:bloc_api_call/presentation/widgets/shimmer_loading.dart';
 import 'package:flutter/material.dart';
 
 class ShimmerWidget extends StatelessWidget {

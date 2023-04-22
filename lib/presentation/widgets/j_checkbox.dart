@@ -1,6 +1,6 @@
-import 'package:comento_task/application/styles/j_theme.dart';
-import 'package:comento_task/application/types/j_option_type.dart';
-import 'package:comento_task/application/utils/primary_extension.dart';
+import 'package:bloc_api_call/application/styles/j_theme.dart';
+import 'package:bloc_api_call/application/types/j_option_type.dart';
+import 'package:bloc_api_call/application/utils/primary_extension.dart';
 import 'package:flutter/material.dart';
 
 class JCheckbox<T> extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:comento_task/domain/models/detail_model.dart';
-import 'package:comento_task/domain/repositories/comento_repository.dart';
+import 'package:bloc_api_call/domain/models/detail_model.dart';
+import 'package:bloc_api_call/domain/repositories/comento_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 

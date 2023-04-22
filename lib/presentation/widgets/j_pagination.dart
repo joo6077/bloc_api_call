@@ -1,8 +1,8 @@
-import 'package:comento_task/application/utils/primary_extension.dart';
-import 'package:comento_task/domain/models/link_model.dart';
+import 'package:bloc_api_call/application/utils/primary_extension.dart';
+import 'package:bloc_api_call/domain/models/link_model.dart';
 import 'package:flutter/material.dart';
 
-import 'package:comento_task/application/styles/j_theme.dart';
+import 'package:bloc_api_call/application/styles/j_theme.dart';
 
 class JPagination extends StatelessWidget {
   final List<LinkModel> items;

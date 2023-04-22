@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:comento_task/domain/models/category_item_model.dart';
-import 'package:comento_task/domain/repositories/comento_repository.dart';
+import 'package:bloc_api_call/domain/models/category_item_model.dart';
+import 'package:bloc_api_call/domain/repositories/comento_repository.dart';
 import 'package:equatable/equatable.dart';
 
 part 'category_event.dart';

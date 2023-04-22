@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.comento_task">
+    package="com.example.bloc_api_call">
    <application
-        android:label="comento_task"
+        android:label="bloc_api_call"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

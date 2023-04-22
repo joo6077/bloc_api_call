@@ -1,4 +1,4 @@
-import 'package:comento_task/application/styles/j_theme.dart';
+import 'package:bloc_api_call/application/styles/j_theme.dart';
 import 'package:flutter/material.dart';
 
 class JDivider extends StatelessWidget {

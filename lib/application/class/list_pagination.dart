@@ -1,4 +1,4 @@
-import 'package:comento_task/application/class/pagination.dart';
+import 'package:bloc_api_call/application/class/pagination.dart';
 
 class ListPagination extends Pagination {
   final List<int> categoryIds;
